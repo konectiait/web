@@ -24,7 +24,7 @@ namespace MundoCanjeWeb.Controllers
 
         // GET: api/Preguntas_Frecuentes/5
         [ResponseType(typeof(Preguntas_Frecuentes))]
-        public IHttpActionResult GetPreguntas_Frecuentes(string id)
+        public IHttpActionResult GetPreguntas_Frecuentes(int id)
         {
             Preguntas_Frecuentes preguntas_Frecuentes = db.Preguntas_Frecuentes.Find(id);
             if (preguntas_Frecuentes == null)
@@ -102,7 +102,7 @@ namespace MundoCanjeWeb.Controllers
 
         // DELETE: api/Preguntas_Frecuentes/5
         [ResponseType(typeof(Preguntas_Frecuentes))]
-        public IHttpActionResult DeletePreguntas_Frecuentes(string id)
+        public IHttpActionResult DeletePreguntas_Frecuentes(int id)
         {
             Preguntas_Frecuentes preguntas_Frecuentes = db.Preguntas_Frecuentes.Find(id);
             if (preguntas_Frecuentes == null)

@@ -27,11 +27,12 @@ namespace MundoCanjeWeb.Models
         public string token { get; set; }
         public Nullable<int> Estado { get; set; }
         public Nullable<int> IdTipo { get; set; }
-        public Nullable<int> Cuit { get; set; }
+        public string Cuit { get; set; }
         public string Razon_Social { get; set; }
         public string Lat { get; set; }
         public string Long { get; set; }
         public Nullable<int> Puntuacion { get; set; }
+        public string Imagen { get; set; }
     
         public virtual ICollection<Productos> Productos { get; set; }
         public virtual Usuarios_Tipos Usuarios_Tipos { get; set; }

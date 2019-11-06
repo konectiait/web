@@ -67,11 +67,12 @@
   </EntityType>
   <EntityType Name="Preguntas_Frecuentes">
     <Key>
-      <PropertyRef Name="Pregunta" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="Pregunta" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Respuesta" Type="varchar(max)" />
     <Property Name="Orden" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
@@ -122,14 +123,15 @@
     <Property Name="Telefono" Type="int" />
     <Property Name="Mail" Type="varchar" MaxLength="150" />
     <Property Name="Direccion" Type="varchar(max)" />
-    <Property Name="token" Type="varchar(max)" />
+    <Property Name="token" Type="varchar" MaxLength="50" />
     <Property Name="Estado" Type="int" />
     <Property Name="IdTipo" Type="int" />
-    <Property Name="Cuit" Type="int" />
+    <Property Name="Cuit" Type="varchar" MaxLength="50" />
     <Property Name="Razon_Social" Type="varchar" MaxLength="150" />
     <Property Name="Lat" Type="varchar(max)" />
     <Property Name="Long" Type="varchar(max)" />
     <Property Name="Puntuacion" Type="int" />
+    <Property Name="Imagen" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Usuarios_Tipos">
     <Key>

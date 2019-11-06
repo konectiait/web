@@ -36,8 +36,7 @@ D:\net\MundoCanjeWeb\MundoCanjeWeb\obj\Debug\MundoCanjeWeb.pdb
 D:\net\MundoCanjeWeb\MundoCanjeWeb\bin\System.Web.Cors.dll
 D:\net\MundoCanjeWeb\MundoCanjeWeb\bin\System.Web.Http.Cors.dll
 D:\net\MundoCanjeWeb\MundoCanjeWeb\bin\System.Web.Http.Cors.xml
-D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.dll
-D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.pdb
+D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.csprojAssemblyReference.cache
 D:\net\MundoCanjeWeb\web\bin\roslyn\csc.exe
 D:\net\MundoCanjeWeb\web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\net\MundoCanjeWeb\web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -73,5 +72,6 @@ D:\net\MundoCanjeWeb\web\bin\System.Web.Http.WebHost.xml
 D:\net\MundoCanjeWeb\web\bin\es\System.Net.Http.Formatting.resources.dll
 D:\net\MundoCanjeWeb\web\bin\es\System.Web.Http.resources.dll
 D:\net\MundoCanjeWeb\web\bin\es\System.Web.Http.WebHost.resources.dll
-D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.csprojAssemblyReference.cache
 D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.csproj.CopyComplete
+D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.dll
+D:\net\MundoCanjeWeb\web\obj\Debug\MundoCanjeWeb.pdb

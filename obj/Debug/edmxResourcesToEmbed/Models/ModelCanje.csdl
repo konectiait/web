@@ -8,12 +8,10 @@
     <EntitySet Name="Notificaciones" EntityType="MundoCanjeDBModel.Notificaciones" />
     <EntitySet Name="Pedidos" EntityType="MundoCanjeDBModel.Pedidos" />
     <EntitySet Name="Pedidos_Estados" EntityType="MundoCanjeDBModel.Pedidos_Estados" />
-    <EntitySet Name="Preguntas_Frecuentes" EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" />
     <EntitySet Name="Productos" EntityType="MundoCanjeDBModel.Productos" />
     <EntitySet Name="Productos_Estados" EntityType="MundoCanjeDBModel.Productos_Estados" />
     <EntitySet Name="Productos_Tipos" EntityType="MundoCanjeDBModel.Productos_Tipos" />
     <EntitySet Name="Terminos" EntityType="MundoCanjeDBModel.Terminos" />
-    <EntitySet Name="Usuarios" EntityType="MundoCanjeDBModel.Usuarios" />
     <EntitySet Name="Usuarios_Tipos" EntityType="MundoCanjeDBModel.Usuarios_Tipos" />
     <AssociationSet Name="FK_Productos_Categorias" Association="MundoCanjeDBModel.FK_Productos_Categorias">
       <End Role="Categorias" EntitySet="Categorias" />
@@ -43,6 +41,7 @@
       <End Role="Productos_Tipos" EntitySet="Productos_Tipos" />
       <End Role="Productos" EntitySet="Productos" />
     </AssociationSet>
+    <EntitySet Name="Usuarios" EntityType="MundoCanjeDBModel.Usuarios" />
     <AssociationSet Name="FK_Productos_Usuarios" Association="MundoCanjeDBModel.FK_Productos_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Productos" EntitySet="Productos" />
@@ -51,6 +50,7 @@
       <End Role="Usuarios_Tipos" EntitySet="Usuarios_Tipos" />
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
+    <EntitySet Name="Preguntas_Frecuentes" EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" />
   </EntityContainer>
   <EntityType Name="Categorias">
     <Key>
@@ -124,14 +124,6 @@
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Pedidos" Relationship="MundoCanjeDBModel.FK_Pedidos_Estados" FromRole="Pedidos_Estados" ToRole="Pedidos" />
   </EntityType>
-  <EntityType Name="Preguntas_Frecuentes">
-    <Key>
-      <PropertyRef Name="Pregunta" />
-    </Key>
-    <Property Name="Pregunta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="Respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Orden" Type="Int32" />
-  </EntityType>
   <EntityType Name="Productos">
     <Key>
       <PropertyRef Name="Id" />
@@ -179,26 +171,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Usuarios">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="Telefono" Type="Int32" />
-    <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Estado" Type="Int32" />
-    <Property Name="IdTipo" Type="Int32" />
-    <Property Name="Cuit" Type="Int32" />
-    <Property Name="Razon_Social" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="Lat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Long" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Puntuacion" Type="Int32" />
-    <NavigationProperty Name="Productos" Relationship="MundoCanjeDBModel.FK_Productos_Usuarios" FromRole="Usuarios" ToRole="Productos" />
-    <NavigationProperty Name="Usuarios_Tipos" Relationship="MundoCanjeDBModel.FK_Usuarios_Tipos" FromRole="Usuarios" ToRole="Usuarios_Tipos" />
   </EntityType>
   <EntityType Name="Usuarios_Tipos">
     <Key>
@@ -292,6 +264,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="Int32" />
+    <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="Int32" />
+    <Property Name="IdTipo" Type="Int32" />
+    <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Razon_Social" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Lat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Long" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Puntuacion" Type="Int32" />
+    <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Productos" Relationship="MundoCanjeDBModel.FK_Productos_Usuarios" FromRole="Usuarios" ToRole="Productos" />
+    <NavigationProperty Name="Usuarios_Tipos" Relationship="MundoCanjeDBModel.FK_Usuarios_Tipos" FromRole="Usuarios" ToRole="Usuarios_Tipos" />
+  </EntityType>
   <Association Name="FK_Productos_Usuarios">
     <End Type="MundoCanjeDBModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
     <End Type="MundoCanjeDBModel.Productos" Role="Productos" Multiplicity="*" />
@@ -316,4 +309,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Preguntas_Frecuentes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Pregunta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
 </Schema>

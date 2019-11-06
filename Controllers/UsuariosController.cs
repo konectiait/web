@@ -35,6 +35,32 @@ namespace MundoCanjeWeb.Controllers
             return Ok(usuarios);
         }
 
+        [HttpGet]
+        [Route("api/usuarios/GetUsuariosByTipo/{TipoId}")]
+        public IHttpActionResult GetUsuariosByTipo(int TipoId)
+        {
+            List<Usuarios> listUsuarios = db.Usuarios.Where(x => x.IdTipo == TipoId).ToList();
+            if (listUsuarios == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(listUsuarios);
+        }
+
+        [HttpGet]
+        [Route("api/usuarios/GetUsuarioByToken/{Token}")]
+        public IHttpActionResult GetUsuarioByToken(string Token)
+        {
+            Usuarios objUsuarios = db.Usuarios.Where(x => x.token == Token).FirstOrDefault();
+            if (objUsuarios == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(objUsuarios);
+        }
+
         // PUT: api/Usuarios/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsuarios(int id, Usuarios usuarios)

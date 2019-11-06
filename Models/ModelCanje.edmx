@@ -72,11 +72,12 @@
         </EntityType>
         <EntityType Name="Preguntas_Frecuentes">
           <Key>
-            <PropertyRef Name="Pregunta" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="Pregunta" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Respuesta" Type="varchar(max)" />
           <Property Name="Orden" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -127,14 +128,15 @@
           <Property Name="Telefono" Type="int" />
           <Property Name="Mail" Type="varchar" MaxLength="150" />
           <Property Name="Direccion" Type="varchar(max)" />
-          <Property Name="token" Type="varchar(max)" />
+          <Property Name="token" Type="varchar" MaxLength="50" />
           <Property Name="Estado" Type="int" />
           <Property Name="IdTipo" Type="int" />
-          <Property Name="Cuit" Type="int" />
+          <Property Name="Cuit" Type="varchar" MaxLength="50" />
           <Property Name="Razon_Social" Type="varchar" MaxLength="150" />
           <Property Name="Lat" Type="varchar(max)" />
           <Property Name="Long" Type="varchar(max)" />
           <Property Name="Puntuacion" Type="int" />
+          <Property Name="Imagen" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Usuarios_Tipos">
           <Key>
@@ -315,12 +317,10 @@
           <EntitySet Name="Notificaciones" EntityType="MundoCanjeDBModel.Notificaciones" />
           <EntitySet Name="Pedidos" EntityType="MundoCanjeDBModel.Pedidos" />
           <EntitySet Name="Pedidos_Estados" EntityType="MundoCanjeDBModel.Pedidos_Estados" />
-          <EntitySet Name="Preguntas_Frecuentes" EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" />
           <EntitySet Name="Productos" EntityType="MundoCanjeDBModel.Productos" />
           <EntitySet Name="Productos_Estados" EntityType="MundoCanjeDBModel.Productos_Estados" />
           <EntitySet Name="Productos_Tipos" EntityType="MundoCanjeDBModel.Productos_Tipos" />
           <EntitySet Name="Terminos" EntityType="MundoCanjeDBModel.Terminos" />
-          <EntitySet Name="Usuarios" EntityType="MundoCanjeDBModel.Usuarios" />
           <EntitySet Name="Usuarios_Tipos" EntityType="MundoCanjeDBModel.Usuarios_Tipos" />
           <AssociationSet Name="FK_Productos_Categorias" Association="MundoCanjeDBModel.FK_Productos_Categorias">
             <End Role="Categorias" EntitySet="Categorias" />
@@ -350,6 +350,7 @@
             <End Role="Productos_Tipos" EntitySet="Productos_Tipos" />
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
+          <EntitySet Name="Usuarios" EntityType="MundoCanjeDBModel.Usuarios" />
           <AssociationSet Name="FK_Productos_Usuarios" Association="MundoCanjeDBModel.FK_Productos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Productos" EntitySet="Productos" />
@@ -358,7 +359,8 @@
             <End Role="Usuarios_Tipos" EntitySet="Usuarios_Tipos" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Preguntas_Frecuentes" EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" />
+          </EntityContainer>
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="Id" />
@@ -431,14 +433,6 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Pedidos" Relationship="MundoCanjeDBModel.FK_Pedidos_Estados" FromRole="Pedidos_Estados" ToRole="Pedidos" />
         </EntityType>
-        <EntityType Name="Preguntas_Frecuentes">
-          <Key>
-            <PropertyRef Name="Pregunta" />
-          </Key>
-          <Property Name="Pregunta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Orden" Type="Int32" />
-        </EntityType>
         <EntityType Name="Productos">
           <Key>
             <PropertyRef Name="Id" />
@@ -486,26 +480,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="Int32" />
-          <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Int32" />
-          <Property Name="IdTipo" Type="Int32" />
-          <Property Name="Cuit" Type="Int32" />
-          <Property Name="Razon_Social" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Lat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Long" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Puntuacion" Type="Int32" />
-          <NavigationProperty Name="Productos" Relationship="MundoCanjeDBModel.FK_Productos_Usuarios" FromRole="Usuarios" ToRole="Productos" />
-          <NavigationProperty Name="Usuarios_Tipos" Relationship="MundoCanjeDBModel.FK_Usuarios_Tipos" FromRole="Usuarios" ToRole="Usuarios_Tipos" />
         </EntityType>
         <EntityType Name="Usuarios_Tipos">
           <Key>
@@ -599,6 +573,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Razon_Social" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Long" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Puntuacion" Type="Int32" />
+          <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="MundoCanjeDBModel.FK_Productos_Usuarios" FromRole="Usuarios" ToRole="Productos" />
+          <NavigationProperty Name="Usuarios_Tipos" Relationship="MundoCanjeDBModel.FK_Usuarios_Tipos" FromRole="Usuarios" ToRole="Usuarios_Tipos" />
+        </EntityType>
         <Association Name="FK_Productos_Usuarios">
           <End Type="MundoCanjeDBModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
           <End Type="MundoCanjeDBModel.Productos" Role="Productos" Multiplicity="*" />
@@ -623,6 +618,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Preguntas_Frecuentes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Pregunta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -701,15 +705,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Preguntas_Frecuentes">
-            <EntityTypeMapping TypeName="MundoCanjeDBModel.Preguntas_Frecuentes">
-              <MappingFragment StoreEntitySet="Preguntas_Frecuentes">
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
-                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Productos">
             <EntityTypeMapping TypeName="MundoCanjeDBModel.Productos">
               <MappingFragment StoreEntitySet="Productos">
@@ -754,9 +749,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios_Tipos">
+            <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios_Tipos">
+              <MappingFragment StoreEntitySet="Usuarios_Tipos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="Puntuacion" ColumnName="Puntuacion" />
                 <ScalarProperty Name="Long" ColumnName="Long" />
                 <ScalarProperty Name="Lat" ColumnName="Lat" />
@@ -773,11 +777,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios_Tipos">
-            <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios_Tipos">
-              <MappingFragment StoreEntitySet="Usuarios_Tipos">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <EntitySetMapping Name="Preguntas_Frecuentes">
+            <EntityTypeMapping TypeName="MundoCanjeDBModel.Preguntas_Frecuentes">
+              <MappingFragment StoreEntitySet="Preguntas_Frecuentes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

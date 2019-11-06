@@ -107,6 +107,91 @@
     <Content Include="App_Data\MundoCanjeDB_log.ldf">
       <DependentUpon>MundoCanjeDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Cpanel\assets\css\style.css" />
+    <Content Include="Cpanel\assets\images\dashboard\circle.png" />
+    <Content Include="Cpanel\assets\images\dashboard\circle.svg" />
+    <Content Include="Cpanel\assets\images\dashboard\img_1.jpg" />
+    <Content Include="Cpanel\assets\images\dashboard\img_2.jpg" />
+    <Content Include="Cpanel\assets\images\dashboard\img_3.jpg" />
+    <Content Include="Cpanel\assets\images\dashboard\img_4.jpg" />
+    <Content Include="Cpanel\assets\images\faces-clipart\pic-1.png" />
+    <Content Include="Cpanel\assets\images\faces-clipart\pic-2.png" />
+    <Content Include="Cpanel\assets\images\faces-clipart\pic-3.png" />
+    <Content Include="Cpanel\assets\images\faces-clipart\pic-4.png" />
+    <Content Include="Cpanel\assets\images\faces\face1.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face10.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face11.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face12.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face13.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face14.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face15.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face16.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face17.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face18.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face19.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face2.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face20.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face21.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face22.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face23.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face24.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face25.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face26.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face27.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face3.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face4.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face5.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face6.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face7.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face8.jpg" />
+    <Content Include="Cpanel\assets\images\faces\face9.jpg" />
+    <Content Include="Cpanel\assets\images\favicon.png" />
+    <Content Include="Cpanel\assets\images\logo-mini.svg" />
+    <Content Include="Cpanel\assets\images\logo.svg" />
+    <Content Include="Cpanel\assets\images\sprites\blue.png" />
+    <Content Include="Cpanel\assets\images\sprites\dark.png" />
+    <Content Include="Cpanel\assets\images\sprites\flag.png" />
+    <Content Include="Cpanel\assets\images\sprites\green.png" />
+    <Content Include="Cpanel\assets\images\sprites\jsgrid-icons.png" />
+    <Content Include="Cpanel\assets\images\sprites\red.png" />
+    <Content Include="Cpanel\assets\images\sprites\yellow.png" />
+    <Content Include="Cpanel\assets\js\chart.js" />
+    <Content Include="Cpanel\assets\js\dashboard.js" />
+    <Content Include="Cpanel\assets\js\file-upload.js" />
+    <Content Include="Cpanel\assets\js\hoverable-collapse.js" />
+    <Content Include="Cpanel\assets\js\misc.js" />
+    <Content Include="Cpanel\assets\js\off-canvas.js" />
+    <Content Include="Cpanel\assets\js\todo.js" />
+    <Content Include="Cpanel\assets\js\todolist.js" />
+    <Content Include="Cpanel\assets\vendors\chart.js\Chart.min.js" />
+    <Content Include="Cpanel\assets\vendors\css\vendor.bundle.base.css" />
+    <Content Include="Cpanel\assets\vendors\js\vendor.bundle.base.js" />
+    <Content Include="Cpanel\assets\vendors\mdi\css\materialdesignicons.min.css" />
+    <Content Include="Cpanel\ListadoTerminos.aspx" />
+    <Content Include="Cpanel\ListadoFAQ.aspx" />
+    <Content Include="Cpanel\Comercios.aspx" />
+    <Content Include="Cpanel\Categorias.aspx" />
+    <Content Include="Cpanel\Default.aspx" />
+    <Content Include="Cpanel\gulp-tasks\inject.js" />
+    <Content Include="Cpanel\gulp-tasks\serve.js" />
+    <Content Include="Cpanel\gulp-tasks\vendors.js" />
+    <Content Include="Cpanel\gulpfile123.js" />
+    <Content Include="Cpanel\index.html" />
+    <Content Include="Cpanel\Login.aspx" />
+    <Content Include="Cpanel\pages\charts\chartjs.html" />
+    <Content Include="Cpanel\pages\forms\basic_elements.html" />
+    <Content Include="Cpanel\pages\icons\mdi.html" />
+    <Content Include="Cpanel\pages\samples\blank-page.html" />
+    <Content Include="Cpanel\pages\samples\error-404.html" />
+    <Content Include="Cpanel\pages\samples\error-500.html" />
+    <Content Include="Cpanel\pages\samples\login.html" />
+    <Content Include="Cpanel\pages\samples\register.html" />
+    <Content Include="Cpanel\pages\tables\basic-table.html" />
+    <Content Include="Cpanel\pages\ui-features\buttons.html" />
+    <Content Include="Cpanel\pages\ui-features\typography.html" />
+    <Content Include="Cpanel\partials\_footer.html" />
+    <Content Include="Cpanel\partials\_navbar.html" />
+    <Content Include="Cpanel\partials\_sidebar.html" />
     <Content Include="Global.asax" />
     <Content Include="Models\ModelCanje.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -133,6 +218,57 @@
     <Compile Include="Controllers\TerminosController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Cpanel\ListadoTerminos.aspx.cs">
+      <DependentUpon>ListadoTerminos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoTerminos.aspx.designer.cs">
+      <DependentUpon>ListadoTerminos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\ListadoFAQ.aspx.cs">
+      <DependentUpon>ListadoFAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoFAQ.aspx.designer.cs">
+      <DependentUpon>ListadoFAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\Comercios.aspx.cs">
+      <DependentUpon>Comercios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\Comercios.aspx.designer.cs">
+      <DependentUpon>Comercios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\Clases\ApiServices.cs" />
+    <Compile Include="Cpanel\Categorias.aspx.cs">
+      <DependentUpon>Categorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\Categorias.aspx.designer.cs">
+      <DependentUpon>Categorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\Clases\ResponseServices.cs" />
+    <Compile Include="Cpanel\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\Principal.Master.cs">
+      <DependentUpon>Principal.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\Principal.Master.designer.cs">
+      <DependentUpon>Principal.Master</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,6 +340,72 @@
     <Content Include="Models\ModelCanje.edmx.diagram">
       <DependentUpon>ModelCanje.edmx</DependentUpon>
     </Content>
+    <Content Include="Cpanel\assets\css\style.css.map" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Bold.eot" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Bold.ttf" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Bold.woff" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Bold.woff2" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Light.eot" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Light.ttf" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Light.woff" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Light.woff2" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Medium.eot" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Medium.ttf" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Medium.woff" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Medium.woff2" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Regular.eot" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Regular.ttf" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Regular.woff" />
+    <Content Include="Cpanel\assets\fonts\Ubuntu\Ubuntu-Regular.woff2" />
+    <Content Include="Cpanel\assets\scss\components\_badges.scss" />
+    <Content Include="Cpanel\assets\scss\components\_bootstrap-progress.scss" />
+    <Content Include="Cpanel\assets\scss\components\_breadcrumbs.scss" />
+    <Content Include="Cpanel\assets\scss\components\_buttons.scss" />
+    <Content Include="Cpanel\assets\scss\components\_cards.scss" />
+    <Content Include="Cpanel\assets\scss\components\_checkbox-radio.scss" />
+    <Content Include="Cpanel\assets\scss\components\_dropdown.scss" />
+    <Content Include="Cpanel\assets\scss\components\_forms.scss" />
+    <Content Include="Cpanel\assets\scss\components\_icons.scss" />
+    <Content Include="Cpanel\assets\scss\components\_lists.scss" />
+    <Content Include="Cpanel\assets\scss\components\_preview.scss" />
+    <Content Include="Cpanel\assets\scss\components\_tables.scss" />
+    <Content Include="Cpanel\assets\scss\components\_todo-list.scss" />
+    <Content Include="Cpanel\assets\scss\landing-screens\_auth.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_animation.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_background.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_badges.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_blockqoute.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_breadcrumbs.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_buttons.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_cards.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_misc.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_pagination.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_popovers.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_text.scss" />
+    <Content Include="Cpanel\assets\scss\mixins\_tooltips.scss" />
+    <Content Include="Cpanel\assets\scss\style.scss" />
+    <Content Include="Cpanel\assets\scss\_dashboard.scss" />
+    <Content Include="Cpanel\assets\scss\_demo.scss" />
+    <Content Include="Cpanel\assets\scss\_fonts.scss" />
+    <Content Include="Cpanel\assets\scss\_footer.scss" />
+    <Content Include="Cpanel\assets\scss\_functions.scss" />
+    <Content Include="Cpanel\assets\scss\_layouts.scss" />
+    <Content Include="Cpanel\assets\scss\_misc.scss" />
+    <Content Include="Cpanel\assets\scss\_navbar.scss" />
+    <Content Include="Cpanel\assets\scss\_reset.scss" />
+    <Content Include="Cpanel\assets\scss\_sidebar.scss" />
+    <Content Include="Cpanel\assets\scss\_typography.scss" />
+    <Content Include="Cpanel\assets\scss\_utilities.scss" />
+    <Content Include="Cpanel\assets\scss\_variables.scss" />
+    <Content Include="Cpanel\assets\scss\_vertical-wrapper.scss" />
+    <Content Include="Cpanel\assets\scss\_widget-grid.scss" />
+    <Content Include="Cpanel\assets\vendors\js\bootstrap.min.js.map" />
+    <Content Include="Cpanel\assets\vendors\mdi\css\materialdesignicons.min.css.map" />
+    <Content Include="Cpanel\assets\vendors\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="Cpanel\assets\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="Cpanel\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="Cpanel\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="Cpanel\Principal.Master" />
     <None Include="Properties\PublishProfiles\MundoCanje.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -215,6 +417,7 @@
   <ItemGroup>
     <Folder Include="Imagenes\Categorias\" />
     <Folder Include="Imagenes\Productos\" />
+    <Folder Include="Imagenes\Usuarios\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

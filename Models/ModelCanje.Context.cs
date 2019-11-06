@@ -32,12 +32,12 @@ namespace MundoCanjeWeb.Models
         public DbSet<Notificaciones> Notificaciones { get; set; }
         public DbSet<Pedidos> Pedidos { get; set; }
         public DbSet<Pedidos_Estados> Pedidos_Estados { get; set; }
-        public DbSet<Preguntas_Frecuentes> Preguntas_Frecuentes { get; set; }
         public DbSet<Productos> Productos { get; set; }
         public DbSet<Productos_Estados> Productos_Estados { get; set; }
         public DbSet<Productos_Tipos> Productos_Tipos { get; set; }
         public DbSet<Terminos> Terminos { get; set; }
-        public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Usuarios_Tipos> Usuarios_Tipos { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Preguntas_Frecuentes> Preguntas_Frecuentes { get; set; }
     }
 }
