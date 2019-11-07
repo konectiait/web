@@ -320,6 +320,7 @@
     <Compile Include="Models\Productos_Tipos.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductoViewModel.cs" />
     <Compile Include="Models\Terminos.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>

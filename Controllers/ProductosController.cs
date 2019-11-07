@@ -35,6 +35,40 @@ namespace MundoCanjeWeb.Controllers
             return Ok(productos);
         }
 
+        [HttpGet]
+        [Route("api/productos/ProductsByUser/{idUsuario}")]
+        public List<ProductoViewModel> ProductsByUser(string idUsuario)
+        {
+            List<Productos> listaProductos = db.Productos.Where(x => x.IdUsuario.ToString().Contains(idUsuario)).ToList();
+
+            if (listaProductos == null)
+            {
+                return null;
+            }
+
+            List<ProductoViewModel> listVM = new List<ProductoViewModel>();
+            foreach (var item in listaProductos)
+            {
+                listVM.Add(new ProductoViewModel
+                {
+                    Id = item.Id,
+                    Nombre = item.Nombre,
+                    Descripcion = item.Descripcion,
+                    IdTipo = item.IdTipo,
+                    IdEstado = item.IdEstado,
+                    Importe = item.Importe,
+                    Fecha_Publicacion = item.Fecha_Publicacion,
+                    TipoDespublicacion = item.TipoDespublicacion,
+                    IdCategoria = item.IdCategoria,
+                    IdUsuario = item.IdUsuario,
+                    Cantidad = item.Cantidad
+                });
+
+            }
+
+            return listVM;
+        }
+
         // PUT: api/Productos/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProductos(int id, Productos productos)
