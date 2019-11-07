@@ -73,15 +73,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Preguntas_Frecuentes">
-      <EntityTypeMapping TypeName="MundoCanjeDBModel.Preguntas_Frecuentes">
-        <MappingFragment StoreEntitySet="Preguntas_Frecuentes">
-          <ScalarProperty Name="Orden" ColumnName="Orden" />
-          <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
-          <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Productos">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Productos">
         <MappingFragment StoreEntitySet="Productos">
@@ -137,6 +128,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Puntuacion" ColumnName="Puntuacion" />
           <ScalarProperty Name="Long" ColumnName="Long" />
@@ -149,6 +141,26 @@
           <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="Mail" ColumnName="Mail" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Preguntas_Frecuentes">
+      <EntityTypeMapping TypeName="MundoCanjeDBModel.Preguntas_Frecuentes">
+        <MappingFragment StoreEntitySet="Preguntas_Frecuentes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+          <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Planes">
+      <EntityTypeMapping TypeName="MundoCanjeDBModel.Planes">
+        <MappingFragment StoreEntitySet="Planes">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

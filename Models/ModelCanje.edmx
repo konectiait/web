@@ -70,6 +70,15 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="Preguntas_Frecuentes">
           <Key>
             <PropertyRef Name="Id" />
@@ -137,6 +146,7 @@
           <Property Name="Long" Type="varchar(max)" />
           <Property Name="Puntuacion" Type="int" />
           <Property Name="Imagen" Type="varchar(max)" />
+          <Property Name="IdPlan" Type="int" />
         </EntityType>
         <EntityType Name="Usuarios_Tipos">
           <Key>
@@ -241,6 +251,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Usuarios_Planes">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Tipos">
           <End Role="Usuarios_Tipos" Type="Self.Usuarios_Tipos" Multiplicity="0..1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -261,6 +283,7 @@
           <EntitySet Name="Notificaciones" EntityType="Self.Notificaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos_Estados" EntityType="Self.Pedidos_Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Preguntas_Frecuentes" EntityType="Self.Preguntas_Frecuentes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos_Estados" EntityType="Self.Productos_Estados" Schema="dbo" store:Type="Tables" />
@@ -299,6 +322,10 @@
           <AssociationSet Name="FK_Productos_Usuarios" Association="Self.FK_Productos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Planes" Association="Self.FK_Usuarios_Planes">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Tipos" Association="Self.FK_Usuarios_Tipos">
             <End Role="Usuarios_Tipos" EntitySet="Usuarios_Tipos" />
@@ -360,6 +387,11 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <EntitySet Name="Preguntas_Frecuentes" EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" />
+          <EntitySet Name="Planes" EntityType="MundoCanjeDBModel.Planes" />
+          <AssociationSet Name="FK_Usuarios_Planes" Association="MundoCanjeDBModel.FK_Usuarios_Planes">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Categorias">
           <Key>
@@ -593,6 +625,8 @@
           <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Productos" Relationship="MundoCanjeDBModel.FK_Productos_Usuarios" FromRole="Usuarios" ToRole="Productos" />
           <NavigationProperty Name="Usuarios_Tipos" Relationship="MundoCanjeDBModel.FK_Usuarios_Tipos" FromRole="Usuarios" ToRole="Usuarios_Tipos" />
+          <Property Name="IdPlan" Type="Int32" />
+          <NavigationProperty Name="Planes" Relationship="MundoCanjeDBModel.FK_Usuarios_Planes" FromRole="Usuarios" ToRole="Planes" />
         </EntityType>
         <Association Name="FK_Productos_Usuarios">
           <End Type="MundoCanjeDBModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
@@ -627,6 +661,28 @@
           <Property Name="Orden" Type="Int32" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Usuarios" Relationship="MundoCanjeDBModel.FK_Usuarios_Planes" FromRole="Planes" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Usuarios_Planes">
+          <End Type="MundoCanjeDBModel.Planes" Role="Planes" Multiplicity="0..1" />
+          <End Type="MundoCanjeDBModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -760,6 +816,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="Puntuacion" ColumnName="Puntuacion" />
                 <ScalarProperty Name="Long" ColumnName="Long" />
@@ -784,6 +841,16 @@
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
                 <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planes">
+            <EntityTypeMapping TypeName="MundoCanjeDBModel.Planes">
+              <MappingFragment StoreEntitySet="Planes">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -232,8 +232,8 @@
                             <li class="nav-item"> <a class="nav-link" href="comercios.aspx"> Comercios</a></li>
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Idiomas</a></li>
                           <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Localidades </a></li>
-                          <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Preguntas Frecuentes </a></li>
-                          <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Términos y condiciones </a></li>
+                          <li class="nav-item"> <a class="nav-link" href="listadofaq.aspx"> Preguntas Frecuentes </a></li>
+                          <li class="nav-item"> <a class="nav-link" href="listadoTerminos.aspx"> Términos y condiciones </a></li>
                           <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Usuarios </a></li>
                         </ul>
                       </div>

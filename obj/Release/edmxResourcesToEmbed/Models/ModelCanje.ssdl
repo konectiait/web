@@ -65,13 +65,23 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Planes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="varchar(max)" />
+    <Property Name="Valor" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
   <EntityType Name="Preguntas_Frecuentes">
     <Key>
-      <PropertyRef Name="Pregunta" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="Pregunta" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Respuesta" Type="varchar(max)" />
     <Property Name="Orden" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
@@ -131,6 +141,7 @@
     <Property Name="Long" Type="varchar(max)" />
     <Property Name="Puntuacion" Type="int" />
     <Property Name="Imagen" Type="varchar(max)" />
+    <Property Name="IdPlan" Type="int" />
   </EntityType>
   <EntityType Name="Usuarios_Tipos">
     <Key>
@@ -235,6 +246,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Usuarios_Planes">
+    <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdPlan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Usuarios_Tipos">
     <End Role="Usuarios_Tipos" Type="Self.Usuarios_Tipos" Multiplicity="0..1" />
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -255,6 +278,7 @@
     <EntitySet Name="Notificaciones" EntityType="Self.Notificaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos_Estados" EntityType="Self.Pedidos_Estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Preguntas_Frecuentes" EntityType="Self.Preguntas_Frecuentes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos_Estados" EntityType="Self.Productos_Estados" Schema="dbo" store:Type="Tables" />
@@ -293,6 +317,10 @@
     <AssociationSet Name="FK_Productos_Usuarios" Association="Self.FK_Productos_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Planes" Association="Self.FK_Usuarios_Planes">
+      <End Role="Planes" EntitySet="Planes" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuarios_Tipos" Association="Self.FK_Usuarios_Tipos">
       <End Role="Usuarios_Tipos" EntitySet="Usuarios_Tipos" />

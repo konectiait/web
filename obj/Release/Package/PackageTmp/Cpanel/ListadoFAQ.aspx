@@ -63,6 +63,7 @@
                       <table class="table">
                         <thead>
                           <tr>
+                            <th> Id </th>
                             <th> Pregunta </th>
                             <th> Order </th>
                             <th> Acciones </th>
@@ -89,7 +90,7 @@
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><i class="fa fa-pencil"></i> Edición de la Pregunta</h4>
+            <h4 class="modal-title"><i class="fa fa-pencil"></i> Edición de la Pregunta <asp:Label ID="LblIdPregunta" runat="server" Text="0"></asp:Label></h4>
             </div>
             <div class="modal-body">
                 <div class="form-horizontal form-label-left">                    
@@ -108,7 +109,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-12 col-sm-12 col-xs-12">Order</label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <asp:TextBox class="form-control" ClientIDMode="Static" placeholder="Order" ID="TxbOrden" runat="server" MaxLength="10"></asp:TextBox>
+                            <asp:TextBox class="form-control" ClientIDMode="Static" placeholder="Order" ID="TxbOrden" runat="server" MaxLength="10" TextMode="Number"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -210,7 +211,7 @@
             
             var EsNuevo = $("[id$=HdnEsNuevo]").val();
 
-            var local = { Orden: vOrden, Pregunta: vPreg, Respuesta: vResp };
+            var local = { Id: vIdPreg, Orden: vOrden, Pregunta: vPreg, Respuesta: vResp };
 
             $.ajax({
                 type: "POST",

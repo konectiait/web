@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="MundoCanjeDBModel.Notificaciones" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Pedidos" Width="1.5" PointX="7.5" PointY="1.75" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Pedidos_Estados" Width="1.5" PointX="5.25" PointY="7.375" />
-        <EntityTypeShape EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" Width="1.5" PointX="5.75" PointY="9.75" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Productos" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Productos_Estados" Width="1.5" PointX="3" PointY="14" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Productos_Tipos" Width="1.5" PointX="3" PointY="6.75" />
@@ -28,6 +27,9 @@
         <EntityTypeShape EntityType="MundoCanjeDBModel.Usuarios" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="MundoCanjeDBModel.FK_Productos_Usuarios" />
         <AssociationConnector Association="MundoCanjeDBModel.FK_Usuarios_Tipos" />
+        <EntityTypeShape EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="MundoCanjeDBModel.Planes" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="MundoCanjeDBModel.FK_Usuarios_Planes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

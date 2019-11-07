@@ -128,6 +128,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Puntuacion" ColumnName="Puntuacion" />
           <ScalarProperty Name="Long" ColumnName="Long" />
@@ -152,6 +153,16 @@
           <ScalarProperty Name="Orden" ColumnName="Orden" />
           <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
           <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Planes">
+      <EntityTypeMapping TypeName="MundoCanjeDBModel.Planes">
+        <MappingFragment StoreEntitySet="Planes">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -51,6 +51,11 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
     <EntitySet Name="Preguntas_Frecuentes" EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" />
+    <EntitySet Name="Planes" EntityType="MundoCanjeDBModel.Planes" />
+    <AssociationSet Name="FK_Usuarios_Planes" Association="MundoCanjeDBModel.FK_Usuarios_Planes">
+      <End Role="Planes" EntitySet="Planes" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Categorias">
     <Key>
@@ -284,6 +289,8 @@
     <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Productos" Relationship="MundoCanjeDBModel.FK_Productos_Usuarios" FromRole="Usuarios" ToRole="Productos" />
     <NavigationProperty Name="Usuarios_Tipos" Relationship="MundoCanjeDBModel.FK_Usuarios_Tipos" FromRole="Usuarios" ToRole="Usuarios_Tipos" />
+    <Property Name="IdPlan" Type="Int32" />
+    <NavigationProperty Name="Planes" Relationship="MundoCanjeDBModel.FK_Usuarios_Planes" FromRole="Usuarios" ToRole="Planes" />
   </EntityType>
   <Association Name="FK_Productos_Usuarios">
     <End Type="MundoCanjeDBModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
@@ -318,4 +325,26 @@
     <Property Name="Orden" Type="Int32" />
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
+  <EntityType Name="Planes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Usuarios" Relationship="MundoCanjeDBModel.FK_Usuarios_Planes" FromRole="Planes" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK_Usuarios_Planes">
+    <End Type="MundoCanjeDBModel.Planes" Role="Planes" Multiplicity="0..1" />
+    <End Type="MundoCanjeDBModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdPlan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

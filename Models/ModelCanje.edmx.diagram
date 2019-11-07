@@ -28,6 +28,8 @@
         <AssociationConnector Association="MundoCanjeDBModel.FK_Productos_Usuarios" />
         <AssociationConnector Association="MundoCanjeDBModel.FK_Usuarios_Tipos" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="MundoCanjeDBModel.Planes" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="MundoCanjeDBModel.FK_Usuarios_Planes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

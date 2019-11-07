@@ -33,8 +33,10 @@ namespace MundoCanjeWeb.Models
         public string Long { get; set; }
         public Nullable<int> Puntuacion { get; set; }
         public string Imagen { get; set; }
+        public Nullable<int> IdPlan { get; set; }
     
         public virtual ICollection<Productos> Productos { get; set; }
         public virtual Usuarios_Tipos Usuarios_Tipos { get; set; }
+        public virtual Planes Planes { get; set; }
     }
 }

@@ -167,6 +167,7 @@
     <Content Include="Cpanel\assets\vendors\css\vendor.bundle.base.css" />
     <Content Include="Cpanel\assets\vendors\js\vendor.bundle.base.js" />
     <Content Include="Cpanel\assets\vendors\mdi\css\materialdesignicons.min.css" />
+    <Content Include="Cpanel\ListadoUsuarios.aspx" />
     <Content Include="Cpanel\ListadoTerminos.aspx" />
     <Content Include="Cpanel\ListadoFAQ.aspx" />
     <Content Include="Cpanel\Comercios.aspx" />
@@ -218,6 +219,13 @@
     <Compile Include="Controllers\TerminosController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Cpanel\ListadoUsuarios.aspx.cs">
+      <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoUsuarios.aspx.designer.cs">
+      <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cpanel\ListadoTerminos.aspx.cs">
       <DependentUpon>ListadoTerminos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -306,6 +314,9 @@
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedidos_Estados.cs">
+      <DependentUpon>ModelCanje.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Planes.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Preguntas_Frecuentes.cs">

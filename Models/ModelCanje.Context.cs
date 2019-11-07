@@ -39,5 +39,6 @@ namespace MundoCanjeWeb.Models
         public DbSet<Usuarios_Tipos> Usuarios_Tipos { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Preguntas_Frecuentes> Preguntas_Frecuentes { get; set; }
+        public DbSet<Planes> Planes { get; set; }
     }
 }
