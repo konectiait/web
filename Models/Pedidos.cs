@@ -21,8 +21,14 @@ namespace MundoCanjeWeb.Models
         public Nullable<System.DateTime> FechaPedido { get; set; }
         public Nullable<System.DateTime> FechaEntrega { get; set; }
         public string Comentarios { get; set; }
+        public Nullable<decimal> Importe { get; set; }
+        public string ImagenMatch { get; set; }
+        public Nullable<decimal> ImporteDiferencia { get; set; }
+        public string ProductoNombreMatch { get; set; }
+        public string ProductoDescripcionMatch { get; set; }
     
         public virtual Pedidos_Estados Pedidos_Estados { get; set; }
         public virtual Productos Productos { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

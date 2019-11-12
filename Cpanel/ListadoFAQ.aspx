@@ -181,7 +181,7 @@
                 dataType: "json",
                 success: function (response) {
                     var ListaMC = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                    if (ListaMC.Result[0] == null) {
+                    if (ListaMC == null) {
                         //alert('No exiten datos');                        
                         $("[id$=HdnIdFAQ]").val(0);
                         $("#TxbPregunta").val('');
@@ -191,10 +191,10 @@
 
                     }
                     else {
-                        $("[id$=LblIdPregunta]").text(ListaMC.Result[0].Id);
-                        $("#TxbPregunta").val(ListaMC.Result[0].Pregunta);
-                        $("#TxbRespuesta").val(ListaMC.Result[0].Respuesta);
-                        $("#TxbOrden").val(ListaMC.Result[0].Orden);
+                        $("[id$=LblIdPregunta]").text(ListaMC[0].Id);
+                        $("#TxbPregunta").val(ListaMC[0].Pregunta);
+                        $("#TxbRespuesta").val(ListaMC[0].Respuesta);
+                        $("#TxbOrden").val(ListaMC[0].Orden);
                         $("#myModalABM").modal('show');
                     }
                 },

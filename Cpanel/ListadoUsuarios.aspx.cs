@@ -9,16 +9,17 @@ using MundoCanjeWeb.Cpanel.Clases;
 using System.Threading.Tasks;
 using System.Web.Services;
 
-
 namespace MundoCanjeWeb.Cpanel
 {
     public partial class ListadoUsuarios : System.Web.UI.Page
     {
         public void IniciarControles()
         {
-            HdnIdUsuario.Value = "0";           
+            HdnIdUsuario.Value = "0";
+
 
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -31,7 +32,8 @@ namespace MundoCanjeWeb.Cpanel
                 try
                 {
                     IniciarControles();
-                    GetDetalleGrilla().Wait();                    
+                    //GetDetalleGrilla().Wait();  
+                    GetDetalleGrilla();
                 }
                 catch (Exception ex)
                 {
@@ -39,8 +41,9 @@ namespace MundoCanjeWeb.Cpanel
                 }
             }
         }
-        
-        public async Task GetDetalleGrilla() 
+
+        //public async Task GetDetalleGrilla() 
+        public void GetDetalleGrilla()
         {
             ApiServices objApi = new ApiServices();
             string Request = "{}";
@@ -48,9 +51,10 @@ namespace MundoCanjeWeb.Cpanel
             
             if (response.IsSuccessStatusCode)
             {
-                string Respuesta = await response.Content.ReadAsStringAsync();
+                string Respuesta = response.Content.ReadAsStringAsync().Result;
                 List<Models.Usuarios> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.Usuarios>>(Respuesta);
                 string data = "";
+                
                 foreach (var item in obj)
                 {
 
@@ -58,10 +62,18 @@ namespace MundoCanjeWeb.Cpanel
                     data += "<tr> ";
                     data += "<td> " + item.Id + " </td> ";
                     data += "<td> <img src='"+ item.Imagen + "'> " + item.Nombre + " </td>  ";
-                    data += "<td> ACTIVO </td>  ";
+                    if(item.Estado==1)
+                        data += "<td> ACTIVO </td>  ";
+                    else
+                        data += "<td> INACTIVO </td>  ";
+
                     data += "<td><label class='badge badge-gradient-success'>"+item.Planes.Descripcion+"</label> </td> ";
                     data += "<td style='font-size: x-large'>  ";
-                    data += "<a style='cursor:pointer' onclick='GetEditId(" + item.Id + ");return false' ><i class='mdi mdi-lead-pencil'></i><span class='count-symbol bg-warning'></span></a> ";
+                    if (item.Estado == 1)
+                        data += "<a style='cursor:pointer' alt='Desactivar' onclick='ActivarDesactivarUsuario(" + item.Id + ",0);return false' ><i class='mdi mdi-close-circle'></i><span class='count-symbol bg-warning'></span></a> ";
+                    else
+                        data += "<a style='cursor:pointer' alt='Activar' onclick='ActivarDesactivarUsuario(" + item.Id + ",1);return false' ><i class='mdi mdi-checkbox-marked-circle'></i><span class='count-symbol bg-warning'></span></a> ";
+
                     data += "<a style='cursor:pointer' onclick='SetDeleteId(" + item.Id + ");return false' ><i class='mdi mdi-delete-outline'></i><span class='count-symbol bg-warning'></span></a> ";
                     data += "</td>	</tr> ";
 
@@ -70,7 +82,7 @@ namespace MundoCanjeWeb.Cpanel
             }
             else
             {
-                string RespuestaService = await response.Content.ReadAsStringAsync();
+                string RespuestaService = response.Content.ReadAsStringAsync().Result;
                 ApiServices.Response obj = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiServices.Response>(RespuestaService);
                 RespuestaService = response.StatusCode + " - " + obj.Error.message;
             }
@@ -78,7 +90,7 @@ namespace MundoCanjeWeb.Cpanel
         }
 
         [WebMethod]
-        public static async Task<List<Models.Usuarios>> IniModalEdit(string Id)
+        public static List<Models.Usuarios> IniModalEdit(string Id)
         {
             List<Models.Usuarios> lista = new List<Models.Usuarios>();
             try
@@ -93,7 +105,7 @@ namespace MundoCanjeWeb.Cpanel
                     if (response.IsSuccessStatusCode)
                     {
                         //resp = await response.Content.ReadAsAsync();
-                        string Respuesta = await response.Content.ReadAsStringAsync();
+                        string Respuesta = response.Content.ReadAsStringAsync().Result;
                         Models.Usuarios obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Usuarios>(Respuesta);
                         if (obj != null)
                         {
@@ -137,6 +149,8 @@ namespace MundoCanjeWeb.Cpanel
                 {
                     ApiServices objApi = new ApiServices();
                     HttpResponseMessage response = null;
+                    usuario.Fecha_Alta = DateTime.Now;
+
                     string Request = Newtonsoft.Json.JsonConvert.SerializeObject(usuario);
                     if(EsNuevo==0)
                     {
@@ -201,6 +215,62 @@ namespace MundoCanjeWeb.Cpanel
                 //Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                 return 0;
             }
+
+        }
+
+        [WebMethod]
+        public static int GrabarCambioEstado(int IdUsuario, int OnOff)
+        {
+            try
+            {
+                if (IdUsuario > 0)
+                {
+                    ApiServices objApi = new ApiServices();
+                    string Request = "{}";
+                    HttpResponseMessage response = objApi.CallService("usuarios/" + IdUsuario, Request, ApiServices.TypeMethods.GET).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string Respuesta = response.Content.ReadAsStringAsync().Result;
+                        Models.Usuarios objUsuario = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Usuarios>(Respuesta);
+                        if (objUsuario != null)
+                        {
+                            objUsuario.Estado = OnOff;
+                            response = null;
+                            
+                            string Request2 = Newtonsoft.Json.JsonConvert.SerializeObject(objUsuario, new Newtonsoft.Json.JsonSerializerSettings()
+                            {
+                                PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects,
+                                Formatting = Newtonsoft.Json.Formatting.Indented
+                            });
+                            response = objApi.CallService("usuarios/" + objUsuario.Id, Request2, ApiServices.TypeMethods.PUT).Result;
+                            if (response.IsSuccessStatusCode)
+                            {
+                                return 1;
+                            }                            
+                        }
+                        return 0;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                //Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return 0;
+            }
+
+        }
+
+        protected void DlPlan_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

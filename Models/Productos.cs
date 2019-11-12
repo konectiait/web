@@ -30,6 +30,11 @@ namespace MundoCanjeWeb.Models
         public Nullable<int> IdCategoria { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> Cantidad { get; set; }
+        public string Imagen { get; set; }
+        public string Imagen2 { get; set; }
+        public string Imagen3 { get; set; }
+        public string Imagen4 { get; set; }
+        public string CodigoDescuento { get; set; }
     
         public virtual Categorias Categorias { get; set; }
         public virtual Despublicaciones_Tipos Despublicaciones_Tipos { get; set; }

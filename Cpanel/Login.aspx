@@ -20,6 +20,13 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <style type="text/css">
+        .auth .brand-logo img {
+            width: 230px !important;
+            margin-left: 20px !important;
+        }
+    </style>
+
   </head>
 <body>
     <form id="form1" runat="server">
@@ -30,7 +37,7 @@
                     <div class="col-lg-4 mx-auto">
                       <div class="auth-form-light text-left p-5">
                         <div class="brand-logo">
-                          <img src="assets/images/logo.svg" />
+                          <img src="assets/images/banner_mc.png" />
                         </div>
                         <h4>Hola! Bienvenido a MundoCanje</h4>
                         <h6 class="font-weight-light">Iniciar sesión para continuar.</h6>

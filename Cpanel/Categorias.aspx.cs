@@ -26,38 +26,7 @@ namespace MundoCanjeWeb.Cpanel
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //if (!IsPostBack)
-            //{
-            //    int Categoria = 0;
-            //    if (Session["Admin"] == null)
-            //    {
-            //        Response.Redirect("Login.aspx");
-            //    }
-            //    else
-            //    {
-            //        try
-            //        {
-            //            IniciarControles();
-            //            if (Request["Cat"] == null)
-            //            {
-            //                HdnEsNuevaCat.Value = "1";
-            //                GetCategorias().Wait();
-            //            }
-            //            else
-            //            {
-            //                Categoria = Convert.ToInt32(Request["Cat"]);
-            //                HdnIdCategoria.Value = Categoria.ToString();
-            //                GetDatosCategoria(Categoria);
-            //            }
-
-
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            ClientScript.RegisterStartupScript(this.GetType(), "myScript", "alert('Error. No se pudo otener la informacion de la categoria ingresada.');", true);                        
-            //        }
-            //    }
-            //}
+            
             if (Session["Admin"] == null)
             {
                 Response.Redirect("Login.aspx");
@@ -67,7 +36,7 @@ namespace MundoCanjeWeb.Cpanel
                 try
                 {
                     IniciarControles();
-                    GetDetalleGrilla().Wait();                    
+                    GetDetalleGrilla();                    
                 }
                 catch (Exception ex)
                 {
@@ -76,7 +45,7 @@ namespace MundoCanjeWeb.Cpanel
             }
         }
         
-        public async Task GetDetalleGrilla() 
+        public void GetDetalleGrilla() 
         {
             ApiServices objApi = new ApiServices();
             string Request = "{}";
@@ -85,7 +54,7 @@ namespace MundoCanjeWeb.Cpanel
             if (response.IsSuccessStatusCode)
             {
                 //resp = await response.Content.ReadAsAsync();
-                string RespuestaVtex = await response.Content.ReadAsStringAsync();
+                string RespuestaVtex = response.Content.ReadAsStringAsync().Result;
                 List<ResponseServices.RespCategorias> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResponseServices.RespCategorias>>(RespuestaVtex);
                 string data = "";
                 foreach (var item in obj)
@@ -105,7 +74,7 @@ namespace MundoCanjeWeb.Cpanel
             }
             else
             {
-                string RespuestaService = await response.Content.ReadAsStringAsync();
+                string RespuestaService = response.Content.ReadAsStringAsync().Result;
                 ApiServices.Response obj = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiServices.Response>(RespuestaService);
                 RespuestaService = response.StatusCode + " - " + obj.Error.message;
             }
@@ -113,7 +82,7 @@ namespace MundoCanjeWeb.Cpanel
         }
 
         [WebMethod]
-        public static async Task<List<Models.Categorias>> IniModalEdit(string Id)
+        public static List<Models.Categorias> IniModalEdit(string Id)
         {
             List<Models.Categorias> lista = new List<Models.Categorias>();
             try
@@ -128,7 +97,7 @@ namespace MundoCanjeWeb.Cpanel
                     if (response.IsSuccessStatusCode)
                     {
                         //resp = await response.Content.ReadAsAsync();
-                        string Respuesta = await response.Content.ReadAsStringAsync();
+                        string Respuesta = response.Content.ReadAsStringAsync().Result;
                         Models.Categorias obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Categorias>(Respuesta);
                         if (obj != null)
                         {

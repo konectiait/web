@@ -61,6 +61,19 @@ namespace MundoCanjeWeb.Controllers
             return Ok(objUsuarios);
         }
 
+        [HttpGet]
+        [Route("api/usuarios/UltimosUsuarios/{Cantidad}")]
+        public IHttpActionResult UltimosUsuarios(int Cantidad)
+        {
+            var listaUsuarios = db.Usuarios.OrderByDescending(z => z.Id).Take(Cantidad).ToList();
+            if (listaUsuarios == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(listaUsuarios);
+        }
+
         // PUT: api/Usuarios/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsuarios(int id, Usuarios usuarios)

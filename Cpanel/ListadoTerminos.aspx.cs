@@ -31,7 +31,7 @@ namespace MundoCanjeWeb.Cpanel
                 try
                 {
                     IniciarControles();
-                    GetDetalleGrilla().Wait();                    
+                    GetDetalleGrilla();                    
                 }
                 catch (Exception ex)
                 {
@@ -40,7 +40,7 @@ namespace MundoCanjeWeb.Cpanel
             }
         }
         
-        public async Task GetDetalleGrilla() 
+        public void GetDetalleGrilla() 
         {
             ApiServices objApi = new ApiServices();
             string Request = "{}";
@@ -49,7 +49,7 @@ namespace MundoCanjeWeb.Cpanel
             if (response.IsSuccessStatusCode)
             {
                 //resp = await response.Content.ReadAsAsync();
-                string Descripcion = await response.Content.ReadAsStringAsync();
+                string Descripcion = response.Content.ReadAsStringAsync().Result;
                 List<Models.Terminos> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.Terminos>>(Descripcion);
                 string data = "";
                 foreach (var item in obj)
@@ -74,7 +74,7 @@ namespace MundoCanjeWeb.Cpanel
             }
             else
             {
-                string DescripcionService = await response.Content.ReadAsStringAsync();
+                string DescripcionService = response.Content.ReadAsStringAsync().Result;
                 ApiServices.Response obj = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiServices.Response>(DescripcionService);
                 DescripcionService = response.StatusCode + " - " + obj.Error.message;
             }
@@ -82,7 +82,7 @@ namespace MundoCanjeWeb.Cpanel
         }
 
         [WebMethod]
-        public static async Task<List<Models.Terminos>> IniModalEdit(int Id)
+        public static List<Models.Terminos> IniModalEdit(int Id)
         {
             List<Models.Terminos> lista = new List<Models.Terminos>();
             try
@@ -97,7 +97,7 @@ namespace MundoCanjeWeb.Cpanel
                     if (response.IsSuccessStatusCode)
                     {
                         //resp = await response.Content.ReadAsAsync();
-                        string Descripcion = await response.Content.ReadAsStringAsync();
+                        string Descripcion = response.Content.ReadAsStringAsync().Result;
                         Models.Terminos obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Terminos>(Descripcion);
                         if (obj != null)
                         {

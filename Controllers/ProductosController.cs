@@ -69,6 +69,78 @@ namespace MundoCanjeWeb.Controllers
             return listVM;
         }
 
+        
+
+        [HttpGet]
+        [Route("api/productos/HomeApp/")]
+        public HomeViewModel HomeApp()
+        {
+            List<Productos> listaProductos = db.Productos.ToList();
+
+            if (listaProductos == null)
+            {
+                return null;
+            }
+
+            List<Parametros> listaBanner = db.Parametros.Where(z=>z.Key== "home_banner").ToList();
+            List<Productos> listaCanjes = listaProductos.Where(x => x.IdTipo == 1).Take(4).ToList();
+            List<Productos> listaDescuentos = listaProductos.Where(x => x.IdTipo == 1).Take(3).ToList();
+
+            List<ItemVM> listItemBannerVM = new List<ItemVM>();
+            List<ItemVM> listItemCanjeVM = new List<ItemVM>();
+            List<ItemVM> listItemDescVM = new List<ItemVM>();
+            HomeViewModel homeVM = new HomeViewModel();
+
+            foreach (var item in listaBanner)
+            {
+                listItemBannerVM.Add(new ItemVM
+                {
+                    Id = item.Id,
+                    Nombre = item.Key,
+                    Descripcion = "",
+                    IdTipo = 0,
+                    Fecha_Publicacion = DateTime.Now,
+                    Ult_Dias = 1,
+                    Imagen = item.Value
+                });
+
+            }
+            foreach (var item in listaCanjes)
+            {
+                listItemCanjeVM.Add(new ItemVM
+                {
+                    Id = item.Id,
+                    Nombre = item.Nombre,
+                    Descripcion = item.Descripcion,
+                    IdTipo = item.IdTipo,
+                    Fecha_Publicacion = item.Fecha_Publicacion,
+                    Ult_Dias = (int)DateTime.Now.Subtract(item.Fecha_Publicacion.Value).TotalDays,
+                    Imagen = item.Imagen
+                });
+
+            }
+            foreach (var item in listaDescuentos)
+            {
+                listItemDescVM.Add(new ItemVM
+                {
+                    Id = item.Id,
+                    Nombre = item.Nombre,
+                    Descripcion = item.Descripcion,
+                    IdTipo = item.IdTipo,
+                    Fecha_Publicacion = item.Fecha_Publicacion,
+                    Ult_Dias = (int)DateTime.Now.Subtract(item.Fecha_Publicacion.Value).TotalDays,
+                    Imagen = item.Imagen
+                });
+
+            }
+            homeVM.Banners = listItemBannerVM;
+            homeVM.Canjes = listItemCanjeVM;
+            homeVM.Descuentos = listItemDescVM;
+
+
+            return homeVM;
+        }
+
         // PUT: api/Productos/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProductos(int id, Productos productos)

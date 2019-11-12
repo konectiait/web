@@ -33,6 +33,15 @@ namespace MundoCanjeWeb.Cpanel
         protected global::System.Web.UI.WebControls.HiddenField HdnEsNuevo;
 
         /// <summary>
+        /// Control HdnOnOffUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HdnOnOffUsuario;
+
+        /// <summary>
         /// Control LitGrilla.
         /// </summary>
         /// <remarks>
@@ -112,5 +121,23 @@ namespace MundoCanjeWeb.Cpanel
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxbImagen;
+
+        /// <summary>
+        /// Control LblTituloOnOff.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTituloOnOff;
+
+        /// <summary>
+        /// Control LblDescOnOff.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblDescOnOff;
     }
 }

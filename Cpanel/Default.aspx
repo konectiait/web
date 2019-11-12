@@ -19,8 +19,8 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Planes Vendidos <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">$ 15,0000</h2>
-                        <h6 class="card-text">Aumento del 60%</h6>
+                        <h2 class="CPlanesVendidos mb-5">$ 0</h2>
+                        <%--<h6 class="CPlanVendidoPorc card-text">Aumento del 0%</h6>--%>
                       </div>
                     </div>
                   </div>
@@ -30,8 +30,8 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Canjes Realizados <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">230</h2>
-                        <h6 class="card-text">Aumento del 10%</h6>
+                        <h2 class="CCanjesRealizados mb-5">0</h2>
+                        <%--<h6 class="CCanjeAumPorc card-text">Aumento del 0%</h6>--%>
                       </div>
                     </div>
                   </div>
@@ -41,8 +41,8 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Usuarios Activos <i class="mdi mdi-diamond mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-5">1.230</h2>
-                        <h6 class="card-text">Aumento del 5%</h6>
+                        <h2 class="CUsuariosActivos mb-5">0</h2>
+                        <%--<h6 class="CUsuariosActivosPorc card-text">Aumento del 0%</h6>--%>
                       </div>
                     </div>
                   </div>
@@ -86,46 +86,8 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image"> David Grey </td>
-                                <td> Clases de Guitarra </td>
-                                <td>
-                                  <label class="badge badge-gradient-success">FINALIZADO</label>
-                                </td>
-                                <td> 20/10/19 </td>
-                                <td> WD-12345 </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face2.jpg" class="mr-2" alt="image"> Stella Johnson </td>
-                                <td> Bicicleta Playera </td>
-                                <td>
-                                  <label class="badge badge-gradient-warning">EN CONTACTO</label>
-                                </td>
-                                <td> 20/10/19 </td>
-                                <td> WD-12346 </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image"> Marina Michel </td>
-                                <td> 24 Medialunas </td>
-                                <td>
-                                  <label class="badge badge-gradient-info">EN ESPERA</label>
-                                </td>
-                                <td> 25/10/19 </td>
-                                <td> WD-12347 </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image"> John Doe </td>
-                                <td> Notebook </td>
-                                <td>
-                                  <label class="badge badge-gradient-danger">CANCELADO</label>
-                                </td>
-                                <td> 30/10/19 </td>
-                                <td> WD-12348 </td>
-                              </tr>
+                                <asp:Literal ID="LitGrillaUltCanjes" runat="server"></asp:Literal>
+                           
                             </tbody>
                           </table>
                         </div>
@@ -149,66 +111,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td> 1250 </td>
-                                <td> Pedro Nieves </td>
-                                <td> 30/10/19 </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td> 1251 </td>
-                                <td> Maxi Quiroga </td>
-                                <td> 30/10/19 </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td> 1252 </td>
-                                <td> Sandra Lepper </td>
-                                <td> 31/10/19 </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td> 1253 </td>
-                                <td> Laura Noval </td>
-                                <td> 31/10/19 </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td> 1254 </td>
-                                <td> Roberto Funes </td>
-                                <td> 01/11/19 </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td> 1255 </td>
-                                <td> Angela Lenox </td>
-                                <td> 01/11/19 </td>
-                                <td>
-                                  <div class="progress">
-                                    <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                              </tr>
+                             <asp:Literal ID="LitUltUsuarios" runat="server"></asp:Literal>
                             </tbody>
                           </table>
                         </div>
@@ -230,34 +133,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/LogoPersona1.png" class="mr-2" alt="image"> Roberto Funes </td>
-                                <td> 20% de desc. Stone </td>
-                                <td> 30/10/19 </td>
-                                <td> <label class="badge badge-gradient-info">STO-12345</label> </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face2.jpg" class="mr-2" alt="image"> Angela Lenox </td>
-                                <td> 20% de desc. Cafe Martinez </td>                            
-                                <td> 30/10/19 </td>
-                                <td> <label class="badge badge-gradient-info">MAR-C5346</label> </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image"> Marina Lopez </td>
-                                <td> 2X1 en Tabatha </td>                            
-                                <td> 31/10/19 </td>
-                                <td> <label class="badge badge-gradient-info">WDA-XX2347</label> </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image"> Carlos Rodriguez </td>
-                                <td> 50% off La Continental </td>
-                                <td> 30/10/19 </td>
-                                <td> <label class="badge badge-gradient-info">WD-12348</label> </td>
-                              </tr>
+                              <asp:Literal ID="LitUltCupones" runat="server"></asp:Literal>
                             </tbody>
                           </table>
                         </div>
@@ -278,8 +154,30 @@
             console.log("ready!");
             SetChartVisit();
             SetChartTraffic();
-
+            GetContadores();
         });
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/HomeWebCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {                        
+                        $(".CPlanesVendidos").html(Resp.PlanVendidoCant);
+                        $(".CCanjesRealizados").html(Resp.CanjesRealizadosCant);
+                        $(".CUsuariosActivos").html(Resp.UsuariosActivosCant);
+                    }
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
 
         function SetChartVisit() {
             if ($("#visit-sale-chart").length) {
@@ -416,41 +314,42 @@
                 gradientStrokeRed.addColorStop(1, 'rgba(254, 112, 150, 1)');
                 var gradientLegendRed = 'linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))';
 
-                var gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
-                gradientStrokeGreen.addColorStop(0, 'rgba(6, 185, 157, 1)');
-                gradientStrokeGreen.addColorStop(1, 'rgba(132, 217, 210, 1)');
-                var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';
+                //var gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
+                //gradientStrokeGreen.addColorStop(0, 'rgba(6, 185, 157, 1)');
+                //gradientStrokeGreen.addColorStop(1, 'rgba(132, 217, 210, 1)');
+                //var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';
 
                 var trafficChartData = {
                     datasets: [{
-                        data: [30, 30, 40],
+                        //data: [30, 30, 40],
+                        data: [30, 70],
                         backgroundColor: [
                             gradientStrokeBlue,
-                            gradientStrokeGreen,
+                            //gradientStrokeGreen,
                             gradientStrokeRed
                         ],
                         hoverBackgroundColor: [
                             gradientStrokeBlue,
-                            gradientStrokeGreen,
+                            //gradientStrokeGreen,
                             gradientStrokeRed
                         ],
                         borderColor: [
                             gradientStrokeBlue,
-                            gradientStrokeGreen,
+                            //gradientStrokeGreen,
                             gradientStrokeRed
                         ],
                         legendColor: [
                             gradientLegendBlue,
-                            gradientLegendGreen,
+                            //gradientLegendGreen,
                             gradientLegendRed
                         ]
                     }],
 
                     // These labels appear in the legend and in the tooltips when hovering different arcs
                     labels: [
-                        'Search Engines',
-                        'Direct Click',
-                        'Bookmarks Click',
+                        'IOS OS',
+                        //'Direct Click',
+                        'Android OS',
                     ]
                 };
                 var trafficChartOptions = {

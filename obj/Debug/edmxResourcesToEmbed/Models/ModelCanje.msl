@@ -44,6 +44,8 @@
     <EntitySetMapping Name="Notificaciones">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Notificaciones">
         <MappingFragment StoreEntitySet="Notificaciones">
+          <ScalarProperty Name="Icono" ColumnName="Icono" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
           <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -55,6 +57,11 @@
     <EntitySetMapping Name="Pedidos">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Pedidos">
         <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="ProductoDescripcionMatch" ColumnName="ProductoDescripcionMatch" />
+          <ScalarProperty Name="ProductoNombreMatch" ColumnName="ProductoNombreMatch" />
+          <ScalarProperty Name="ImporteDiferencia" ColumnName="ImporteDiferencia" />
+          <ScalarProperty Name="ImagenMatch" ColumnName="ImagenMatch" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
           <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
           <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
           <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />
@@ -76,6 +83,11 @@
     <EntitySetMapping Name="Productos">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Productos">
         <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="CodigoDescuento" ColumnName="CodigoDescuento" />
+          <ScalarProperty Name="Imagen4" ColumnName="Imagen4" />
+          <ScalarProperty Name="Imagen3" ColumnName="Imagen3" />
+          <ScalarProperty Name="Imagen2" ColumnName="Imagen2" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
@@ -128,6 +140,8 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="MundoCanjeDBModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+          <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
           <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Puntuacion" ColumnName="Puntuacion" />
@@ -162,6 +176,24 @@
           <ScalarProperty Name="Valor" ColumnName="Valor" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Localidades">
+      <EntityTypeMapping TypeName="MundoCanjeDBModel.Localidades">
+        <MappingFragment StoreEntitySet="Localidades">
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parametros">
+      <EntityTypeMapping TypeName="MundoCanjeDBModel.Parametros">
+        <MappingFragment StoreEntitySet="Parametros">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

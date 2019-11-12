@@ -17,6 +17,7 @@ namespace MundoCanjeWeb.Models
         public Usuarios()
         {
             this.Productos = new HashSet<Productos>();
+            this.Pedidos = new HashSet<Pedidos>();
         }
     
         public int Id { get; set; }
@@ -34,9 +35,13 @@ namespace MundoCanjeWeb.Models
         public Nullable<int> Puntuacion { get; set; }
         public string Imagen { get; set; }
         public Nullable<int> IdPlan { get; set; }
+        public Nullable<int> IdLocalidad { get; set; }
+        public Nullable<System.DateTime> Fecha_Alta { get; set; }
     
         public virtual ICollection<Productos> Productos { get; set; }
         public virtual Usuarios_Tipos Usuarios_Tipos { get; set; }
         public virtual Planes Planes { get; set; }
+        public virtual Localidades Localidades { get; set; }
+        public virtual ICollection<Pedidos> Pedidos { get; set; }
     }
 }

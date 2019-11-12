@@ -31,7 +31,7 @@ namespace MundoCanjeWeb.Cpanel
                 try
                 {
                     IniciarControles();
-                    GetDetalleGrilla().Wait();                    
+                    GetDetalleGrilla();                    
                 }
                 catch (Exception ex)
                 {
@@ -40,7 +40,7 @@ namespace MundoCanjeWeb.Cpanel
             }
         }
         
-        public async Task GetDetalleGrilla() 
+        public void GetDetalleGrilla() 
         {
             ApiServices objApi = new ApiServices();
             string Request = "{}";
@@ -48,7 +48,7 @@ namespace MundoCanjeWeb.Cpanel
             
             if (response.IsSuccessStatusCode)
             {
-                string Respuesta = await response.Content.ReadAsStringAsync();
+                string Respuesta = response.Content.ReadAsStringAsync().Result;
                 List<Models.Usuarios> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.Usuarios>>(Respuesta);
                 string data = "";
                 foreach (var item in obj)
@@ -69,7 +69,7 @@ namespace MundoCanjeWeb.Cpanel
             }
             else
             {
-                string RespuestaService = await response.Content.ReadAsStringAsync();
+                string RespuestaService = response.Content.ReadAsStringAsync().Result;
                 ApiServices.Response obj = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiServices.Response>(RespuestaService);
                 RespuestaService = response.StatusCode + " - " + obj.Error.message;
             }
@@ -77,7 +77,7 @@ namespace MundoCanjeWeb.Cpanel
         }
 
         [WebMethod]
-        public static async Task<List<Models.Usuarios>> IniModalEdit(string Id)
+        public static List<Models.Usuarios> IniModalEdit(string Id)
         {
             List<Models.Usuarios> lista = new List<Models.Usuarios>();
             try
@@ -92,7 +92,7 @@ namespace MundoCanjeWeb.Cpanel
                     if (response.IsSuccessStatusCode)
                     {
                         //resp = await response.Content.ReadAsAsync();
-                        string Respuesta = await response.Content.ReadAsStringAsync();
+                        string Respuesta = response.Content.ReadAsStringAsync().Result;
                         Models.Usuarios obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Usuarios>(Respuesta);
                         if (obj != null)
                         {
@@ -142,14 +142,16 @@ namespace MundoCanjeWeb.Cpanel
                 if (comercio != null)
                 {
                     ApiServices objApi = new ApiServices();
-                    HttpResponseMessage response = null;
-                    string Request = Newtonsoft.Json.JsonConvert.SerializeObject(comercio);
+                    HttpResponseMessage response = null;                    
                     if(EsNuevo==0)
                     {
+                        string Request = Newtonsoft.Json.JsonConvert.SerializeObject(comercio);
                         response = objApi.CallService("usuarios/"+ comercio.Id, Request, ApiServices.TypeMethods.PUT).Result;
                     }
                     else
                     {
+                        comercio.Fecha_Alta = DateTime.Now;
+                        string Request = Newtonsoft.Json.JsonConvert.SerializeObject(comercio);
                         response = objApi.CallService("usuarios", Request, ApiServices.TypeMethods.POST).Result;
                     }
 

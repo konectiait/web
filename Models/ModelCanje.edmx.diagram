@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="483903e9f99e44d3bb1fd40b5cbbdbc3" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="483903e9f99e44d3bb1fd40b5cbbdbc3" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="MundoCanjeDBModel.Categorias" Width="1.5" PointX="3" PointY="11.625" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Chats" Width="1.5" PointX="7.75" PointY="6" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Chats_Detalles" Width="1.5" PointX="10" PointY="6" />
@@ -30,6 +30,10 @@
         <EntityTypeShape EntityType="MundoCanjeDBModel.Preguntas_Frecuentes" Width="1.5" PointX="10.375" PointY="9.75" />
         <EntityTypeShape EntityType="MundoCanjeDBModel.Planes" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="MundoCanjeDBModel.FK_Usuarios_Planes" />
+        <EntityTypeShape EntityType="MundoCanjeDBModel.Localidades" Width="1.5" PointX="12.375" PointY="0.875" />
+        <AssociationConnector Association="MundoCanjeDBModel.FK_Usuarios_Localidades" />
+        <EntityTypeShape EntityType="MundoCanjeDBModel.Parametros" Width="1.5" PointX="12.375" PointY="3.75" />
+        <AssociationConnector Association="MundoCanjeDBModel.FK_Pedidos_Usuarios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

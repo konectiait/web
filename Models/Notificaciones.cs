@@ -19,5 +19,7 @@ namespace MundoCanjeWeb.Models
         public string Descripcion { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<int> Prioridad { get; set; }
+        public string Tipo { get; set; }
+        public string Icono { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace MundoCanjeWeb.Cpanel
                 try
                 {
                     IniciarControles();
-                    GetDetalleGrilla().Wait();                    
+                    GetDetalleGrilla();                    
                 }
                 catch (Exception ex)
                 {
@@ -40,7 +40,7 @@ namespace MundoCanjeWeb.Cpanel
             }
         }
         
-        public async Task GetDetalleGrilla() 
+        public void GetDetalleGrilla() 
         {
             ApiServices objApi = new ApiServices();
             string Request = "{}";
@@ -49,7 +49,7 @@ namespace MundoCanjeWeb.Cpanel
             if (response.IsSuccessStatusCode)
             {
                 //resp = await response.Content.ReadAsAsync();
-                string Respuesta = await response.Content.ReadAsStringAsync();
+                string Respuesta = response.Content.ReadAsStringAsync().Result;
                 List<Models.Preguntas_Frecuentes> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.Preguntas_Frecuentes>>(Respuesta);
                 string data = "";
                 foreach (var item in obj)
@@ -70,7 +70,7 @@ namespace MundoCanjeWeb.Cpanel
             }
             else
             {
-                string RespuestaService = await response.Content.ReadAsStringAsync();
+                string RespuestaService = response.Content.ReadAsStringAsync().Result;
                 ApiServices.Response obj = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiServices.Response>(RespuestaService);
                 RespuestaService = response.StatusCode + " - " + obj.Error.message;
             }
@@ -78,7 +78,7 @@ namespace MundoCanjeWeb.Cpanel
         }
 
         [WebMethod]
-        public static async Task<List<Models.Preguntas_Frecuentes>> IniModalEdit(int Id)
+        public static List<Models.Preguntas_Frecuentes> IniModalEdit(int Id)
         {
             List<Models.Preguntas_Frecuentes> lista = new List<Models.Preguntas_Frecuentes>();
             try
@@ -93,7 +93,7 @@ namespace MundoCanjeWeb.Cpanel
                     if (response.IsSuccessStatusCode)
                     {
                         //resp = await response.Content.ReadAsAsync();
-                        string Respuesta = await response.Content.ReadAsStringAsync();
+                        string Respuesta = response.Content.ReadAsStringAsync().Result;
                         Models.Preguntas_Frecuentes obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Preguntas_Frecuentes>(Respuesta);
                         if (obj != null)
                         {
@@ -131,7 +131,7 @@ namespace MundoCanjeWeb.Cpanel
                     string Request = Newtonsoft.Json.JsonConvert.SerializeObject(preg);
                     if(EsNuevo==0)
                     {
-                        response = objApi.CallService("Preguntas_Frecuentes/" + preg.Pregunta, Request, ApiServices.TypeMethods.PUT).Result;
+                        response = objApi.CallService("Preguntas_Frecuentes/" + preg.Id, Request, ApiServices.TypeMethods.PUT).Result;
                     }
                     else
                     {

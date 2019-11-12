@@ -21,6 +21,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="CphBody" runat="server">
     <asp:HiddenField ID="HdnIdUsuario" runat="server" Value="0" />
     <asp:HiddenField ID="HdnEsNuevo" runat="server" Value="0" />
+    <asp:HiddenField ID="HdnOnOffUsuario" runat="server" Value="0" />
     
           <div class="content-wrapper">
             
@@ -74,7 +75,7 @@
                               <h4 class="card-title">Listado de Usuarios</h4>
                           </div>
                           <div class="col-4 text-right">
-                              <button type="button" onclick='NuevoRegistro();return false' class="btn btn-gradient-info btn-icon-text"> Nuevo Usuario <i class="mdi mdi-folder-plus btn-icon-append"></i></button>
+                             <%-- <button type="button" onclick='NuevoRegistro();return false' class="btn btn-gradient-info btn-icon-text"> Nuevo Usuario <i class="mdi mdi-folder-plus btn-icon-append"></i></button>--%>
                           </div>
                        </div>
                     
@@ -149,6 +150,7 @@
                         <label class="control-label col-md-12 col-sm-12 col-xs-12">Plan</label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <asp:TextBox class="form-control" ClientIDMode="Static" placeholder="Plan" ID="TxbPlan" runat="server" MaxLength="150"></asp:TextBox>
+                            <%--<asp:DropDownList id="DlPlan"  AutoPostBack="False" OnSelectedIndexChanged="DlPlan_SelectedIndexChanged" runat="server"/>--%>
                         </div>
                     </div> 
                     <div class="form-group">
@@ -186,6 +188,30 @@
               </div>
               <div class="modal-footer">
                 <button type="button" onclick='DeleteById();return false' class="btn btn-primary">Si</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+    <div class="modal fade" id="modalOnOffUsser" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content" style="width: 70%;">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">
+                    <asp:Label ID="LblTituloOnOff" runat="server" Text=""></asp:Label>
+                </h4>
+              </div>
+              <div class="modal-body">
+                <p><asp:Label ID="LblDescOnOff" runat="server" Text=""></asp:Label></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" onclick='SetOnOffUser();return false' class="btn btn-primary">Si</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                 
               </div>
@@ -252,6 +278,20 @@
             $("[id$=HdnIdUsuario]").val(id);
             $("#modalDelete").modal('show');
         }
+        function ActivarDesactivarUsuario(id, onOff) {
+            $("[id$=HdnIdUsuario]").val(id);
+            $("[id$=HdnOnOffUsuario]").val(onOff);
+            if (onOff == 0) {
+                $("[id$=LblTituloOnOff]").text("Inhabilitar Usuario");
+                $("[id$=LblDescOnOff]").text("¿Esta seguro desactivar el usuario?");
+            }
+            else {
+                $("[id$=LblTituloOnOff]").text("Habilitar Usuario");
+                $("[id$=LblDescOnOff]").text("¿Esta seguro habilitar el usuario?");
+            }
+            $("#modalOnOffUsser").modal('show');
+        }
+
 
         function GetEditId(id) {
             $("[id$=HdnIdUsuario]").val(id);
@@ -280,15 +320,15 @@
 
                     }
                     else {
-                        $("[id$=LblIdUsuario]").text(ListaMC.Result[0].Id);
-                        $("#TxbNombre").val(ListaMC.Result[0].Nombre);
-                        $("#TxbDireccion").val(ListaMC.Result[0].Direccion);
-                        $("#TXbTelefono").val(ListaMC.Result[0].Telefono);
-                        $("#TXbMail").val(ListaMC.Result[0].Mail);
-                        $("#TxbEstado").val(ListaMC.Result[0].Estado);
-                        $("#TxbPlan").val(ListaMC.Result[0].IdPlan);                        
-                        $("#TxbImagen").val(ListaMC.Result[0].Imagen);
-                        $("#myUploadedImg").attr("src", ListaMC.Result[0].Imagen);
+                        $("[id$=LblIdUsuario]").text(ListaMC[0].Id);
+                        $("#TxbNombre").val(ListaMC[0].Nombre);
+                        $("#TxbDireccion").val(ListaMC[0].Direccion);
+                        $("#TXbTelefono").val(ListaMC[0].Telefono);
+                        $("#TXbMail").val(ListaMC[0].Mail);
+                        $("#TxbEstado").val(ListaMC[0].Estado);
+                        $("#TxbPlan").val(ListaMC[0].IdPlan);                        
+                        $("#TxbImagen").val(ListaMC[0].Imagen);
+                        $("#myUploadedImg").attr("src", ListaMC[0].Imagen);
                         $("#myModalABM").modal('show');
                     }
                 },
@@ -368,6 +408,34 @@
             });
         }
 
+        function SetOnOffUser() {
+            var vId = $("[id$=HdnIdUsuario]").val();
+            var vOnOff = $("[id$=HdnOnOffUsuario]").val();
+
+            $.ajax({
+                type: "POST",
+                url: "ListadoUsuarios.aspx/GrabarCambioEstado",
+                data: JSON.stringify({ 'IdUsuario': vId, 'OnOff': vOnOff }),
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var resp = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    if (resp == 1) {
+                        $('#modalOnOffUsser').modal('hide'); $('body').removeClass('modal-open'); $('.modal-backdrop').remove();
+                        //RefrescarUpdatePanel();
+                        window.location.href = "ListadoUsuarios.aspx";
+                    }
+                    else {
+                        AlertError();
+                    }
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+        
       
     </script>
 </asp:Content>

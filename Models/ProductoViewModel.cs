@@ -18,5 +18,31 @@ namespace MundoCanjeWeb.Models
         public Nullable<int> IdCategoria { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> Cantidad { get; set; }
+        public string Imagen { get; set; }
+        public Nullable<int> Ult_Dias { get; set; }
+        public string Subtitulo { get; set; }
+    }
+
+    public class ContadoresProductos
+    {
+        public string CanjesPendientes { get; set; }
+        public string CanjesCancelados { get; set; }
+        public string CanjesIniciados { get; set; }
+        public string CanjesConfirmados { get; set; }
+        public string DescuentosPendientes { get; set; }
+        public string DescuentosCancelados { get; set; }
+        public string DescuentosIniciados { get; set; }
+        public string DescuentosConfirmados { get; set; }
+
+    }
+
+    public class ContadoresHomeWeb
+    {
+        public string PlanVendidoCant { get; set; }
+        public string PlanVendidoPorc { get; set; }
+        public string CanjesRealizadosCant { get; set; }
+        public string CanjesRealizadosPorc { get; set; }
+        public string UsuariosActivosCant { get; set; }
+        public string UsuariosActivosPorc { get; set; }
     }
 }

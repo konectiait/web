@@ -36,6 +36,14 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Localidades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" />
+    <Property Name="Provincia" Type="varchar(max)" />
+  </EntityType>
   <EntityType Name="Notificaciones">
     <Key>
       <PropertyRef Name="Id" />
@@ -45,6 +53,16 @@
     <Property Name="Descripcion" Type="varchar(max)" />
     <Property Name="Fecha" Type="datetime" />
     <Property Name="Prioridad" Type="int" />
+    <Property Name="Tipo" Type="varchar" MaxLength="1" />
+    <Property Name="Icono" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Key" Type="varchar" MaxLength="15" />
+    <Property Name="Value" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Pedidos">
     <Key>
@@ -57,6 +75,11 @@
     <Property Name="FechaPedido" Type="datetime" />
     <Property Name="FechaEntrega" Type="datetime" />
     <Property Name="Comentarios" Type="varchar(max)" />
+    <Property Name="Importe" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ImagenMatch" Type="varchar(max)" />
+    <Property Name="ImporteDiferencia" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductoNombreMatch" Type="varchar" MaxLength="150" />
+    <Property Name="ProductoDescripcionMatch" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Pedidos_Estados">
     <Key>
@@ -98,6 +121,11 @@
     <Property Name="IdCategoria" Type="int" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="Cantidad" Type="int" />
+    <Property Name="Imagen" Type="varchar(max)" />
+    <Property Name="Imagen2" Type="varchar(max)" />
+    <Property Name="Imagen3" Type="varchar(max)" />
+    <Property Name="Imagen4" Type="varchar(max)" />
+    <Property Name="CodigoDescuento" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Productos_Estados">
     <Key>
@@ -142,6 +170,8 @@
     <Property Name="Puntuacion" Type="int" />
     <Property Name="Imagen" Type="varchar(max)" />
     <Property Name="IdPlan" Type="int" />
+    <Property Name="IdLocalidad" Type="int" />
+    <Property Name="Fecha_Alta" Type="datetime" />
   </EntityType>
   <EntityType Name="Usuarios_Tipos">
     <Key>
@@ -183,6 +213,18 @@
       </Principal>
       <Dependent Role="Pedidos">
         <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -246,6 +288,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Usuarios_Localidades">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Usuarios_Planes">
     <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -275,7 +329,9 @@
     <EntitySet Name="Chats" EntityType="Self.Chats" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chats_Detalles" EntityType="Self.Chats_Detalles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Despublicaciones_Tipos" EntityType="Self.Despublicaciones_Tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notificaciones" EntityType="Self.Notificaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos_Estados" EntityType="Self.Pedidos_Estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
@@ -298,6 +354,10 @@
       <End Role="Productos" EntitySet="Productos" />
       <End Role="Pedidos" EntitySet="Pedidos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_Usuarios" Association="Self.FK_Pedidos_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
       <End Role="Categorias" EntitySet="Categorias" />
       <End Role="Productos" EntitySet="Productos" />
@@ -317,6 +377,10 @@
     <AssociationSet Name="FK_Productos_Usuarios" Association="Self.FK_Productos_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Localidades" Association="Self.FK_Usuarios_Localidades">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuarios_Planes" Association="Self.FK_Usuarios_Planes">
       <End Role="Planes" EntitySet="Planes" />

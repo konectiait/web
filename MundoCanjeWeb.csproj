@@ -167,6 +167,11 @@
     <Content Include="Cpanel\assets\vendors\css\vendor.bundle.base.css" />
     <Content Include="Cpanel\assets\vendors\js\vendor.bundle.base.js" />
     <Content Include="Cpanel\assets\vendors\mdi\css\materialdesignicons.min.css" />
+    <Content Include="Cpanel\Detalle.aspx" />
+    <Content Include="Cpanel\ListadoNotificaciones.aspx" />
+    <Content Include="Cpanel\ListadoDescuentos.aspx" />
+    <Content Include="Cpanel\ListadoLocalidades.aspx" />
+    <Content Include="Cpanel\ListadoCanjes.aspx" />
     <Content Include="Cpanel\ListadoUsuarios.aspx" />
     <Content Include="Cpanel\ListadoTerminos.aspx" />
     <Content Include="Cpanel\ListadoFAQ.aspx" />
@@ -212,13 +217,50 @@
     <Compile Include="Controllers\ChatsController.cs" />
     <Compile Include="Controllers\Chats_DetallesController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\LocalidadesController.cs" />
     <Compile Include="Controllers\NotificacionesController.cs" />
+    <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Preguntas_FrecuentesController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\TerminosController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Cpanel\Detalle.aspx.cs">
+      <DependentUpon>Detalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\Detalle.aspx.designer.cs">
+      <DependentUpon>Detalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\ListadoNotificaciones.aspx.cs">
+      <DependentUpon>ListadoNotificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoNotificaciones.aspx.designer.cs">
+      <DependentUpon>ListadoNotificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\ListadoDescuentos.aspx.cs">
+      <DependentUpon>ListadoDescuentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoDescuentos.aspx.designer.cs">
+      <DependentUpon>ListadoDescuentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\ListadoLocalidades.aspx.cs">
+      <DependentUpon>ListadoLocalidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoLocalidades.aspx.designer.cs">
+      <DependentUpon>ListadoLocalidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cpanel\ListadoCanjes.aspx.cs">
+      <DependentUpon>ListadoCanjes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cpanel\ListadoCanjes.aspx.designer.cs">
+      <DependentUpon>ListadoCanjes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cpanel\ListadoUsuarios.aspx.cs">
       <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +334,10 @@
     <Compile Include="Models\Despublicaciones_Tipos.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FuncGrales.cs" />
+    <Compile Include="Models\Localidades.cs">
+      <DependentUpon>ModelCanje.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelCanje.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -308,6 +354,9 @@
       <DependentUpon>ModelCanje.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Notificaciones.cs">
+      <DependentUpon>ModelCanje.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Parametros.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedidos.cs">
@@ -331,6 +380,8 @@
     <Compile Include="Models\Productos_Tipos.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\ProductoViewModel.cs" />
     <Compile Include="Models\Terminos.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>

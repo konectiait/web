@@ -274,7 +274,7 @@
                 dataType: "json",
                 success: function (response) {
                     var ListaMC = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                    if (ListaMC.Result[0] == null) {
+                    if (ListaMC == null) {
                         //alert('No exiten datos');                        
                         $("[id$=HdnIdComercio]").val(0);
                         $("[id$=LblIdComercio]").text(0);
@@ -289,15 +289,15 @@
 
                     }
                     else {
-                        $("[id$=LblIdComercio]").text(ListaMC.Result[0].Id);
-                        $("#TxbNombre").val(ListaMC.Result[0].Nombre);
-                        $("#TxbDireccion").val(ListaMC.Result[0].Direccion);
-                        $("#TXbTelefono").val(ListaMC.Result[0].Telefono);
-                        $("#TXbMail").val(ListaMC.Result[0].Mail);
-                        $("#TXbCuit").val(ListaMC.Result[0].Cuit);
-                        $("#TxbRazonSocial").val(ListaMC.Result[0].Razon_Social);                        
-                        $("#TxbImagen").val(ListaMC.Result[0].Imagen);
-                        $("#myUploadedImg").attr("src", ListaMC.Result[0].Imagen);
+                        $("[id$=LblIdComercio]").text(ListaMC[0].Id);
+                        $("#TxbNombre").val(ListaMC[0].Nombre);
+                        $("#TxbDireccion").val(ListaMC[0].Direccion);
+                        $("#TXbTelefono").val(ListaMC[0].Telefono);
+                        $("#TXbMail").val(ListaMC[0].Mail);
+                        $("#TXbCuit").val(ListaMC[0].Cuit);
+                        $("#TxbRazonSocial").val(ListaMC[0].Razon_Social);                        
+                        $("#TxbImagen").val(ListaMC[0].Imagen);
+                        $("#myUploadedImg").attr("src", ListaMC[0].Imagen);
                         $("#myModalABM").modal('show');
                     }
                 },

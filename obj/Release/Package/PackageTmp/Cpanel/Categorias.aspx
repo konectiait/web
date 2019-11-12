@@ -234,7 +234,7 @@
                 dataType: "json",
                 success: function (response) {
                     var ListaMC = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                    if (ListaMC.Result[0] == null) {
+                    if (ListaMC == null) {
                         //alert('No exiten datos');                        
                         $("[id$=HdnIdCategoria]").val(0);
                         $("[id$=LblIdCategoria]").text(0);
@@ -244,10 +244,10 @@
 
                     }
                     else {
-                        $("[id$=LblIdCategoria]").text(ListaMC.Result[0].Id);
-                        $("#TxbNombre").val(ListaMC.Result[0].Nombre);
-                        $("#TxbImagen").val(ListaMC.Result[0].Imagen);
-                        $("#myUploadedImg").attr("src", ListaMC.Result[0].Imagen);
+                        $("[id$=LblIdCategoria]").text(ListaMC[0].Id);
+                        $("#TxbNombre").val(ListaMC[0].Nombre);
+                        $("#TxbImagen").val(ListaMC[0].Imagen);
+                        $("#myUploadedImg").attr("src", ListaMC[0].Imagen);
                         $("#myModalABM").modal('show');
                     }
                 },

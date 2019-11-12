@@ -37,14 +37,14 @@ namespace MundoCanjeWeb.Controllers
 
         // PUT: api/Preguntas_Frecuentes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPreguntas_Frecuentes(string id, Preguntas_Frecuentes preguntas_Frecuentes)
+        public IHttpActionResult PutPreguntas_Frecuentes(int id, Preguntas_Frecuentes preguntas_Frecuentes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != preguntas_Frecuentes.Pregunta)
+            if (id != preguntas_Frecuentes.Id)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace MundoCanjeWeb.Controllers
             }
             catch (DbUpdateException)
             {
-                if (Preguntas_FrecuentesExists(preguntas_Frecuentes.Pregunta))
+                if (Preguntas_FrecuentesExists(preguntas_Frecuentes.Id))
                 {
                     return Conflict();
                 }
@@ -97,7 +97,7 @@ namespace MundoCanjeWeb.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = preguntas_Frecuentes.Pregunta }, preguntas_Frecuentes);
+            return CreatedAtRoute("DefaultApi", new { id = preguntas_Frecuentes.Id }, preguntas_Frecuentes);
         }
 
         // DELETE: api/Preguntas_Frecuentes/5
@@ -125,9 +125,10 @@ namespace MundoCanjeWeb.Controllers
             base.Dispose(disposing);
         }
 
-        private bool Preguntas_FrecuentesExists(string id)
+
+        private bool Preguntas_FrecuentesExists(int id)
         {
-            return db.Preguntas_Frecuentes.Count(e => e.Pregunta == id) > 0;
+            return db.Preguntas_Frecuentes.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -21,6 +21,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="CphBody" runat="server">
     <asp:HiddenField ID="HdnIdUsuario" runat="server" Value="0" />
     <asp:HiddenField ID="HdnEsNuevo" runat="server" Value="0" />
+    <asp:HiddenField ID="HdnOnOffUsuario" runat="server" Value="0" />
     
           <div class="content-wrapper">
             
@@ -28,7 +29,7 @@
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
                   <i class="mdi mdi-home"></i>
-                </span> Comercios </h3>
+                </span> Usuarios </h3>
               
             </div>
             <div class="row">
@@ -36,7 +37,7 @@
                 <div class="card bg-gradient-danger card-img-holder text-white">
                   <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Comercios Totales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-3">Usuarios Totales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-1">152</h2>
         
@@ -47,7 +48,7 @@
                     <div class="card bg-gradient-info card-img-holder text-white">
                       <div class="card-body">
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                        <h4 class="font-weight-normal mb-3">Canjes de Comercios <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                        <h4 class="font-weight-normal mb-3">Canjes de Usuarios <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                         </h4>
                         <h2 class="mb-1">50</h2>
                       </div>
@@ -57,7 +58,7 @@
                     <div class="card bg-gradient-success card-img-holder text-white">
                       <div class="card-body">
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                        <h4 class="font-weight-normal mb-3">Cupones de Comercios <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                        <h4 class="font-weight-normal mb-3">Cupones de Usuarios <i class="mdi mdi-diamond mdi-24px float-right"></i>
                         </h4>
                         <h2 class="mb-1">68</h2>
                       </div>
@@ -71,10 +72,10 @@
                   <div class="card-body">
                       <div class="row">
                           <div class="col-8">
-                              <h4 class="card-title">Listado de Comercios</h4>
+                              <h4 class="card-title">Listado de Usuarios</h4>
                           </div>
                           <div class="col-4 text-right">
-                              <button type="button" onclick='NuevoRegistro();return false' class="btn btn-gradient-info btn-icon-text"> Nuevo Comercio <i class="mdi mdi-folder-plus btn-icon-append"></i></button>
+                             <%-- <button type="button" onclick='NuevoRegistro();return false' class="btn btn-gradient-info btn-icon-text"> Nuevo Usuario <i class="mdi mdi-folder-plus btn-icon-append"></i></button>--%>
                           </div>
                        </div>
                     
@@ -92,7 +93,7 @@
                         </thead>
                         <tbody>
                           
-                            <asp:Literal ID="LitComercios" runat="server"></asp:Literal>
+                            <asp:Literal ID="LitGrilla" runat="server"></asp:Literal>
                         </tbody>
                       </table>
                     </div>
@@ -111,7 +112,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><i class="fa fa-pencil"></i> Edición del Comercio: <asp:Label ID="LblIdUsuario" runat="server" Text="0"></asp:Label></h4>
+            <h4 class="modal-title"><i class="fa fa-pencil"></i> Edición del Usuario: <asp:Label ID="LblIdUsuario" runat="server" Text="0"></asp:Label></h4>
             </div>
             <div class="modal-body">
                 <div class="form-horizontal form-label-left">                    
@@ -149,6 +150,7 @@
                         <label class="control-label col-md-12 col-sm-12 col-xs-12">Plan</label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <asp:TextBox class="form-control" ClientIDMode="Static" placeholder="Plan" ID="TxbPlan" runat="server" MaxLength="150"></asp:TextBox>
+                            <%--<asp:DropDownList id="DlPlan"  AutoPostBack="False" OnSelectedIndexChanged="DlPlan_SelectedIndexChanged" runat="server"/>--%>
                         </div>
                     </div> 
                     <div class="form-group">
@@ -164,8 +166,8 @@
             </div>
             <div class="modal-footer">                
                 <button type="button" ID="BtnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" ID="BtnAceptar" class="btn btn-primary" onclick="GrabarComercio(); return false" >Aceptar</button>
-                <%--<asp:Button ID="BtnAceptar" class="btn btn-primary" runat="server" Text="Aceptar" OnClientClick="GrabarComercio(); return false"  />   --%>             
+                <button type="button" ID="BtnAceptar" class="btn btn-primary" onclick="GrabarUsuario(); return false" >Aceptar</button>
+                <%--<asp:Button ID="BtnAceptar" class="btn btn-primary" runat="server" Text="Aceptar" OnClientClick="GrabarUsuario(); return false"  />   --%>             
             </div>
         </div>
         <!-- /.modal-content -->
@@ -186,6 +188,30 @@
               </div>
               <div class="modal-footer">
                 <button type="button" onclick='DeleteById();return false' class="btn btn-primary">Si</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+    <div class="modal fade" id="modalOnOffUsser" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content" style="width: 70%;">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">
+                    <asp:Label ID="LblTituloOnOff" runat="server" Text=""></asp:Label>
+                </h4>
+              </div>
+              <div class="modal-body">
+                <p><asp:Label ID="LblDescOnOff" runat="server" Text=""></asp:Label></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" onclick='SetOnOffUser();return false' class="btn btn-primary">Si</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                 
               </div>
@@ -237,12 +263,35 @@
 
         function NuevoRegistro() {
             $("[id$=HdnEsNuevo]").val('1');
+            $("[id$=LblIdUsuario]").text(0);
+            $("#TxbNombre").val('');
+            $("#TxbDireccion").val('');
+            $("#TXbTelefono").val('');
+            $("#TXbMail").val('');
+            $("#TxbEstado").val('');
+            $("#TxbPlan").val('');
+            $("#TxbImagen").val('');
+            $("#myUploadedImg").attr("src", "");
             $("#myModalABM").modal('show');
         }
         function SetDeleteId(id) {
             $("[id$=HdnIdUsuario]").val(id);
             $("#modalDelete").modal('show');
         }
+        function ActivarDesactivarUsuario(id, onOff) {
+            $("[id$=HdnIdUsuario]").val(id);
+            $("[id$=HdnOnOffUsuario]").val(onOff);
+            if (onOff == 0) {
+                $("[id$=LblTituloOnOff]").text("Inhabilitar Usuario");
+                $("[id$=LblDescOnOff]").text("¿Esta seguro desactivar el usuario?");
+            }
+            else {
+                $("[id$=LblTituloOnOff]").text("Habilitar Usuario");
+                $("[id$=LblDescOnOff]").text("¿Esta seguro habilitar el usuario?");
+            }
+            $("#modalOnOffUsser").modal('show');
+        }
+
 
         function GetEditId(id) {
             $("[id$=HdnIdUsuario]").val(id);
@@ -266,19 +315,20 @@
                         $("#TxbEstado").val('');  
                         $("#TxbPlan").val('');  
                         $("#TxbImagen").val('');
+                        $("#myUploadedImg").attr("src", "");
                         $("#myModalABM").modal('show');
 
                     }
                     else {
-                        $("[id$=LblIdUsuario]").text(ListaMC.Result[0].Id);
-                        $("#TxbNombre").val(ListaMC.Result[0].Nombre);
-                        $("#TxbDireccion").val(ListaMC.Result[0].Direccion);
-                        $("#TXbTelefono").val(ListaMC.Result[0].Telefono);
-                        $("#TXbMail").val(ListaMC.Result[0].Mail);
-                        $("#TxbEstado").val(ListaMC.Result[0].Cuit);
-                        $("#TxbPlan").val(ListaMC.Result[0].IdPlan);                        
-                        $("#TxbImagen").val(ListaMC.Result[0].Imagen);
-                        $("#myUploadedImg").attr("src", ListaMC.Result[0].Imagen);
+                        $("[id$=LblIdUsuario]").text(ListaMC[0].Id);
+                        $("#TxbNombre").val(ListaMC[0].Nombre);
+                        $("#TxbDireccion").val(ListaMC[0].Direccion);
+                        $("#TXbTelefono").val(ListaMC[0].Telefono);
+                        $("#TXbMail").val(ListaMC[0].Mail);
+                        $("#TxbEstado").val(ListaMC[0].Estado);
+                        $("#TxbPlan").val(ListaMC[0].IdPlan);                        
+                        $("#TxbImagen").val(ListaMC[0].Imagen);
+                        $("#myUploadedImg").attr("src", ListaMC[0].Imagen);
                         $("#myModalABM").modal('show');
                     }
                 },
@@ -287,7 +337,7 @@
                 }
             });
         }
-        function GrabarComercio() {
+        function GrabarUsuario() {
             var vId = $("[id$=HdnIdUsuario]").val();
             var vNombre = $("#TxbNombre").val();
             var vDireccion = $("#TxbDireccion").val();
@@ -303,7 +353,7 @@
             var vLong = "";
             var vPuntuacion = 0;
 
-            var local = { Id: vId, Nombre: vNombre, Telefono: vTel, Mail: vMail, Direccion: vDireccion, token: vToken, Estado: vIdEstado, IdTipo: vIdTipo, Plan: vPlan, Lat: vLat, Long: vLong, Puntuacion: vPuntuacion, Imagen: vImagen};
+            var local = { Id: vId, Nombre: vNombre, Telefono: vTel, Mail: vMail, Direccion: vDireccion, token: vToken, Estado: vEstado, IdTipo: vIdTipo, IdPlan: vPlan, Lat: vLat, Long: vLong, Puntuacion: vPuntuacion, Imagen: vImagen};
 
             $.ajax({
                 type: "POST",
@@ -337,7 +387,7 @@
             $.ajax({
                 type: "POST",
                 url: "ListadoUsuarios.aspx/Eliminar",
-                data: JSON.stringify({ 'idComercio': vId }),
+                data: JSON.stringify({ 'IdUsuario': vId }),
                 traditional: true,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -358,6 +408,34 @@
             });
         }
 
+        function SetOnOffUser() {
+            var vId = $("[id$=HdnIdUsuario]").val();
+            var vOnOff = $("[id$=HdnOnOffUsuario]").val();
+
+            $.ajax({
+                type: "POST",
+                url: "ListadoUsuarios.aspx/GrabarCambioEstado",
+                data: JSON.stringify({ 'IdUsuario': vId, 'OnOff': vOnOff }),
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var resp = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    if (resp == 1) {
+                        $('#modalOnOffUsser').modal('hide'); $('body').removeClass('modal-open'); $('.modal-backdrop').remove();
+                        //RefrescarUpdatePanel();
+                        window.location.href = "ListadoUsuarios.aspx";
+                    }
+                    else {
+                        AlertError();
+                    }
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+        
       
     </script>
 </asp:Content>
