@@ -33,6 +33,13 @@ namespace MundoCanjeWeb.Models
         public string DescuentosCancelados { get; set; }
         public string DescuentosIniciados { get; set; }
         public string DescuentosConfirmados { get; set; }
+        public string CantidadUsuarios { get; set; }
+        public string CantTerminosYCondiciones { get; set; }
+        public string CantidadCategorias { get; set; }
+        public string CantidadComercios { get; set; }
+        public string CantidadFAQ { get; set; }
+        public string CantidadLocalidades { get; set; }
+        public string CantNotificacEnviadas { get; set; }
 
     }
 

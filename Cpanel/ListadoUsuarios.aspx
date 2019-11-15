@@ -39,7 +39,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Usuarios Totales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-1">152</h2>
+                    <h2 class="CUsuariosTot mb-1">0</h2>
         
                   </div>
                 </div>
@@ -50,7 +50,7 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Canjes de Usuarios <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-1">50</h2>
+                        <h2 class="CCanjesTot mb-1">0</h2>
                       </div>
                     </div>
                   </div>
@@ -60,7 +60,7 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Cupones de Usuarios <i class="mdi mdi-diamond mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-1">68</h2>
+                        <h2 class="CCuponesTot mb-1">0</h2>
                       </div>
                     </div>
                   </div>
@@ -211,7 +211,11 @@
                 <p><asp:Label ID="LblDescOnOff" runat="server" Text=""></asp:Label></p>
               </div>
               <div class="modal-footer">
-                <button type="button" onclick='SetOnOffUser();return false' class="btn btn-primary">Si</button>
+                  
+                   <button type="button" onclick='SetOnOffUser();return false' class="btn btn-primary">
+                        <span class="spinner-border spinner-border-sm btnSiSpinner" role="status" aria-hidden="true"></span>
+                        Si
+                   </button>                
                   <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                 
               </div>
@@ -229,9 +233,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            console.log("ready!");
-            
-
+            GetContadores();
         });
 
         var _URL = window.URL || window.webkitURL;
@@ -261,6 +263,29 @@
             });
         });
 
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/PedidosCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {
+                        $(".CUsuariosTot").html(Resp.CantidadUsuarios);
+                        $(".CCanjesTot").html(Resp.CanjesConfirmados);
+                        $(".CCuponesTot").html(Resp.CantDescuentosConfirmados);
+                    }
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+
         function NuevoRegistro() {
             $("[id$=HdnEsNuevo]").val('1');
             $("[id$=LblIdUsuario]").text(0);
@@ -281,6 +306,7 @@
         function ActivarDesactivarUsuario(id, onOff) {
             $("[id$=HdnIdUsuario]").val(id);
             $("[id$=HdnOnOffUsuario]").val(onOff);
+            $(".btnSiSpinner").hide();
             if (onOff == 0) {
                 $("[id$=LblTituloOnOff]").text("Inhabilitar Usuario");
                 $("[id$=LblDescOnOff]").text("¿Esta seguro desactivar el usuario?");
@@ -411,7 +437,7 @@
         function SetOnOffUser() {
             var vId = $("[id$=HdnIdUsuario]").val();
             var vOnOff = $("[id$=HdnOnOffUsuario]").val();
-
+            $(".btnSiSpinner").show();
             $.ajax({
                 type: "POST",
                 url: "ListadoUsuarios.aspx/GrabarCambioEstado",

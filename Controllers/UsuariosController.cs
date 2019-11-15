@@ -49,6 +49,40 @@ namespace MundoCanjeWeb.Controllers
         }
 
         [HttpGet]
+        [Route("api/usuarios/GetUsuariosById/{Id}")]
+        public UsuarioViewModel GetUsuariosById(int Id)
+        {
+            Usuarios listUsuarios = db.Usuarios.Where(x => x.Id == Id).FirstOrDefault();
+            if (listUsuarios == null)
+            {
+                return null;
+            }
+            UsuarioViewModel listVM = new UsuarioViewModel()
+            {
+                Id = listUsuarios.Id,
+                Nombre = listUsuarios.Nombre,
+                Telefono = (listUsuarios.Telefono != null) ? listUsuarios.Telefono.Value : 0,
+                Mail = listUsuarios.Mail,
+                Direccion = listUsuarios.Direccion,
+                token = listUsuarios.token,
+                Estado = (listUsuarios.Estado != null) ? listUsuarios.Estado.Value : 0,
+                IdTipo = (listUsuarios.IdTipo != null) ? listUsuarios.IdTipo.Value : 0,
+                Cuit = listUsuarios.Cuit,
+                Razon_Social = listUsuarios.Razon_Social,
+                Lat = listUsuarios.Lat,
+                Long = listUsuarios.Long,
+                Puntuacion = (listUsuarios.Puntuacion != null) ? listUsuarios.Puntuacion.Value : 0,
+                Imagen = listUsuarios.Imagen,
+                IdPlan = (listUsuarios.IdPlan != null) ? listUsuarios.IdPlan.Value : 0,
+                IdLocalidad = (listUsuarios.IdLocalidad != null) ? listUsuarios.IdLocalidad.Value : 0,
+                Fecha_Alta = (listUsuarios.Fecha_Alta != null) ? listUsuarios.Fecha_Alta.Value : DateTime.MinValue,
+            };
+            
+
+            return listVM;
+        }
+
+        [HttpGet]
         [Route("api/usuarios/GetUsuarioByToken/{Token}")]
         public IHttpActionResult GetUsuarioByToken(string Token)
         {

@@ -227,28 +227,39 @@ namespace MundoCanjeWeb.Cpanel
                 {
                     ApiServices objApi = new ApiServices();
                     string Request = "{}";
-                    HttpResponseMessage response = objApi.CallService("usuarios/" + IdUsuario, Request, ApiServices.TypeMethods.GET).Result;
+                    HttpResponseMessage response = objApi.CallService("usuarios/GetUsuariosById/" + IdUsuario, Request, ApiServices.TypeMethods.GET).Result;
 
                     if (response.IsSuccessStatusCode)
                     {
                         string Respuesta = response.Content.ReadAsStringAsync().Result;
-                        Models.Usuarios objUsuario = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Usuarios>(Respuesta);
+                        Models.UsuarioViewModel objUsuario = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.UsuarioViewModel>(Respuesta);
                         if (objUsuario != null)
                         {
                             objUsuario.Estado = OnOff;
-                            response = null;
-                            
-                            string Request2 = Newtonsoft.Json.JsonConvert.SerializeObject(objUsuario, new Newtonsoft.Json.JsonSerializerSettings()
-                            {
-                                PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects,
-                                Formatting = Newtonsoft.Json.Formatting.Indented
-                            });
-                            response = objApi.CallService("usuarios/" + objUsuario.Id, Request2, ApiServices.TypeMethods.PUT).Result;
-                            if (response.IsSuccessStatusCode)
+                            string RequestPUT = Newtonsoft.Json.JsonConvert.SerializeObject(objUsuario);
+                            HttpResponseMessage responsePUT = objApi.CallService("usuarios/" + objUsuario.Id, RequestPUT, ApiServices.TypeMethods.PUT).Result;
+                            if (responsePUT.IsSuccessStatusCode)
                             {
                                 return 1;
-                            }                            
+                            }
                         }
+                        //Models.Usuarios objUsuario = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Usuarios>(Respuesta);
+                        //if (objUsuario != null)
+                        //{
+                        //    objUsuario.Estado = OnOff;
+                        //    response = null;
+
+                        //    string Request2 = Newtonsoft.Json.JsonConvert.SerializeObject(objUsuario, new Newtonsoft.Json.JsonSerializerSettings()
+                        //    {
+                        //        PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects,
+                        //        Formatting = Newtonsoft.Json.Formatting.Indented
+                        //    });
+                        //    response = objApi.CallService("usuarios/" + objUsuario.Id, Request2, ApiServices.TypeMethods.PUT).Result;
+                        //    if (response.IsSuccessStatusCode)
+                        //    {
+                        //        return 1;
+                        //    }                            
+                        //}
                         return 0;
                     }
                     else

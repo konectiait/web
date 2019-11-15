@@ -38,7 +38,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Categorias Totales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-1">15</h2>
+                    <h2 class="CCantCategorias mb-1">15</h2>
         
                   </div>
                 </div>
@@ -182,9 +182,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            console.log("ready!");
-            
-
+            GetContadores();
         });
 
         var _URL = window.URL || window.webkitURL;
@@ -214,8 +212,34 @@
             });
         });
 
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/PedidosCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {
+                        $(".CCantCategorias").html(Resp.CantidadCategorias);
+                    }
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+
         function NuevaCategoria() {
             $("[id$=HdnEsNuevaCat]").val('1');
+            $("[id$=HdnIdCategoria]").val(0);
+            $("[id$=LblIdCategoria]").text(0);
+            $("#TxbNombre").val('');
+            $("#TxbImagen").val('');
+            $("#myUploadedImg").attr("src", "")
             $("#myModalABM").modal('show');
         }
         function SetDeleteId(id) {

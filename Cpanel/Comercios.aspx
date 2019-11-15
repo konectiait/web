@@ -38,7 +38,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Comercios Totales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-1">152</h2>
+                    <h2 class="CCantComercios mb-1">0</h2>
         
                   </div>
                 </div>
@@ -49,7 +49,7 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Canjes de Comercios <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-1">50</h2>
+                        <h2 class="CCanjesComercio mb-1">0</h2>
                       </div>
                     </div>
                   </div>
@@ -59,7 +59,7 @@
                         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                         <h4 class="font-weight-normal mb-3">Cupones de Comercios <i class="mdi mdi-diamond mdi-24px float-right"></i>
                         </h4>
-                        <h2 class="mb-1">68</h2>
+                        <h2 class="CCuponesComercio mb-1">0</h2>
                       </div>
                     </div>
                   </div>
@@ -222,9 +222,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            console.log("ready!");
-            
-
+            GetContadores();
         });
 
         var _URL = window.URL || window.webkitURL;
@@ -256,11 +254,43 @@
 
         function NuevoRegistro() {
             $("[id$=HdnEsNuevo]").val('1');
+            $("[id$=HdnIdComercio]").val(0);
+            $("[id$=LblIdComercio]").text(0);
+            $("#TxbNombre").val('');
+            $("#TxbDireccion").val('');
+            $("#TXbTelefono").val('');
+            $("#TXbMail").val('');
+            $("#TXbCuit").val('');
+            $("#TxbRazonSocial").val('');
+            $("#TxbImagen").val('');
+            $("#myUploadedImg").attr("src", "");
             $("#myModalABM").modal('show');
         }
         function SetDeleteId(id) {
             $("[id$=HdnIdComercio]").val(id);
             $("#modalDelete").modal('show');
+        }
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/PedidosCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {
+                        $(".CCantComercios").html(Resp.CantidadComercios);
+                        $(".CCanjesComercio").html(Resp.CanjesConfirmados);
+                        $(".CCuponesComercio").html(Resp.DescuentosPendientes);
+                    }
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
         }
 
         function GetEditId(id) {

@@ -39,7 +39,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Notificaciones Enviadas <i class="mdi mdi-comment-alert-outline mdi-24px float-right"></i>
                     </h4>                    
-                    <h2 class="CDescuentosPend mb-1">0</h2>
+                    <h2 class="CNotifEnviadas mb-1">0</h2>
                   </div>
                     </a>
                 </div>
@@ -178,92 +178,30 @@
 
         $(document).ready(function () {
             console.log("ready!");
-            //GetContadores();
+            GetContadores();
 
         });
-        //var _URL = window.URL || window.webkitURL;
-        //$("#f_UploadImage").on('change', function () {
-        //    var data = new FormData();
-        //    var files = $("#f_UploadImage").get(0).files;
-        //    console.log("El file es: " + files);
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/PedidosCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {
+                        $(".CNotifEnviadas").html(Resp.CantNotificacEnviadas);
+                    }
 
-        //    if (files.length > 0) {
-        //        data.append("UploadedImage", files[0]);
-        //    }
-        //    var ajaxRequest = $.ajax({
-        //        type: "POST",
-        //        url: "/api/image/SaveImage/Productos",
-        //        contentType: false,
-        //        processData: false,
-        //        data: data
-        //    });
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
 
-        //    ajaxRequest.done(function (xhr, textStatus) {
-        //        // Do other operation
-        //        console.log("OK");
-        //        $("#myUploadedImg").attr("src", xhr.Message);
-        //    });
-        //    ajaxRequest.fail(function () {
-        //        console.log("Error al devolver el POST");
-        //    });
-        //});
-
-        
-        //function GetContadores() {
-        //    $.ajax({
-        //        type: "GET",
-        //        url: "../api/Pedidos/PedidosCount",
-        //        data: "{}",
-        //        traditional: true,
-        //        contentType: "application/json; charset=utf-8",
-        //        dataType: "json",
-        //        success: function (response) {
-        //            var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
-        //            if (Resp != null) {
-        //                $(".CDescuentosPend").html(Resp.DescuentosPendientes);
-        //                $(".CDescuentosConfirm").html(Resp.DescuentosConfirmados);
-        //                $(".CDescuentosCancelados").html(Resp.DescuentosCancelados);
-        //            }
-
-        //        },
-        //        error: function (result) {
-        //            alert('ERROR ' + result.status + ' ' + result.statusText);
-        //        }
-        //    });
-        //}
-        //function VerDetalle(Id) {
-        //    window.location.href = "Detalle.aspx?id=" + Id;
-        //}
-        //function SetDeleteId(id) {
-        //    $("[id$=HdnId]").val(id);
-        //    $("#modalDelete").modal('show');
-        //}
-
-        //function EliminarDesc() {
-        //    var vIdDesc = $("[id$=HdnId]").val();
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "ListadoDescuentos.aspx/Eliminar",
-        //        data: JSON.stringify({ 'idDesc': vIdDesc }),
-        //        traditional: true,
-        //        contentType: "application/json; charset=utf-8",
-        //        dataType: "json",
-        //        success: function (response) {
-        //            var resp = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-        //            if (resp == 1) {
-        //                $('#modalDelete').modal('hide'); $('body').removeClass('modal-open'); $('.modal-backdrop').remove();
-        //                //RefrescarUpdatePanel();
-        //                window.location.href = "ListadoDescuentos.aspx";
-        //            }
-        //            else {
-        //                AlertError();
-        //            }
-        //        },
-        //        error: function (result) {
-        //            alert('ERROR ' + result.status + ' ' + result.statusText);
-        //        }
-        //    });
-        //}
         function NuevoRegistro() {
             $("[id$=HdnEsNuevo]").val('1');
             $("#myModalABM").modal('show');

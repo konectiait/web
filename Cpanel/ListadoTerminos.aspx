@@ -38,7 +38,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Registros <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-1">15</h2>
+                    <h2 class="CTerminosYCond mb-1">0</h2>
         
                   </div>
                 </div>
@@ -54,7 +54,7 @@
                               <h4 class="card-title">Listado de Terminos y Condiciones</h4>
                           </div>
                           <div class="col-4 text-right">
-                              <button type="button" onclick='NuevoTermino();return false' class="btn btn-gradient-info btn-icon-text"> Nueva Categoría <i class="mdi mdi-folder-plus btn-icon-append"></i></button>
+                              <button type="button" onclick='NuevoTermino();return false' class="btn btn-gradient-info btn-icon-text"> Nueva Registro <i class="mdi mdi-folder-plus btn-icon-append"></i></button>
                           </div>
                        </div>
                     
@@ -149,15 +149,17 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            console.log("ready!");
-            
-
+            GetContadores();
         });
 
         
 
         function NuevoTermino() {
             $("[id$=HdnEsNuevo]").val('1');
+            $("[id$=HdnIdTerminos]").val(0);
+            $("#TxbTitulo").val('');
+            $("#TxbDescripcion").val('');
+
             $("#myModalABM").modal('show');
         }
         function SetDeleteId(id) {
@@ -254,7 +256,26 @@
                 }
             });
         }
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/PedidosCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {
+                        $(".CTerminosYCond").html(Resp.CantTerminosYCondiciones);
+                    }
 
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
       
     </script>
 </asp:Content>

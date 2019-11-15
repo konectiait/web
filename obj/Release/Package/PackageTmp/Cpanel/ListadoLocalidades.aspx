@@ -38,7 +38,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Localidades Totales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-1">15</h2>
+                    <h2 class="CCantLocalidades mb-1">0</h2>
         
                   </div>
                 </div>
@@ -148,15 +148,37 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            console.log("ready!");
-            
-
+            GetContadores();
         });
+        function GetContadores() {
+            $.ajax({
+                type: "GET",
+                url: "../api/Pedidos/PedidosCount",
+                data: "{}",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Resp = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    if (Resp != null) {
+                        $(".CCantLocalidades").html(Resp.CantidadLocalidades);
+                    }
 
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
         
 
         function NuevaLocalidad() {
             $("[id$=HdnEsNuevo]").val('1');
+            $("[id$=HdnIdLocalidad]").val(0);
+            $("[id$=LblIdLocalidad]").text(0);
+            $("#TxbNombre").val('');
+            $("#TxbProvincia").val('');
+
             $("#myModalABM").modal('show');
         }
         function SetDeleteId(id) {

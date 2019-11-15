@@ -335,6 +335,7 @@
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FuncGrales.cs" />
+    <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\Localidades.cs">
       <DependentUpon>ModelCanje.tt</DependentUpon>
     </Compile>

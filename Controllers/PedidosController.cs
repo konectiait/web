@@ -252,7 +252,15 @@ namespace MundoCanjeWeb.Controllers
                 var CantDescuentosIniciados = (from u in db.Pedidos where u.Productos.IdTipo == 2 && u.IdPedido_Estado == 3 select u.Id).Count();
                 var CantDescuentosConfirmados = (from u in db.Pedidos where u.Productos.IdTipo == 2 && u.IdPedido_Estado == 4 select u.Id).Count();
 
-                
+                var CantUsuariosTotales = (from u in db.Usuarios where u.IdTipo == 1 select u.Id).Count();
+                var CantTermYCond = (from u in db.Terminos select u.Id).Count();
+                var CantCategorias = (from u in db.Categorias select u.Id).Count();
+                var CantComerciosTotales = (from u in db.Usuarios where u.IdTipo == 2 select u.Id).Count();
+                var CantPregFrec = (from u in db.Preguntas_Frecuentes select u.Id).Count();
+                var CantLocalidades = (from u in db.Localidades select u.Id).Count();
+                var CantNotifEnviadas = (from u in db.Notificaciones where u.Tipo=="S" select u.Id).Count();
+
+
                 ContadoresProductos Lista = new ContadoresProductos()
                 {
                     CanjesPendientes = CantCanjesPendientes.ToString(),
@@ -262,7 +270,15 @@ namespace MundoCanjeWeb.Controllers
                     DescuentosPendientes = CantDescuentosPendientes.ToString(),
                     DescuentosCancelados = CantDescuentosCancelados.ToString(),
                     DescuentosIniciados = CantDescuentosIniciados.ToString(),
-                    DescuentosConfirmados = CantDescuentosConfirmados.ToString()
+                    DescuentosConfirmados = CantDescuentosConfirmados.ToString(),
+                    CantidadUsuarios = CantUsuariosTotales.ToString(),
+                    CantTerminosYCondiciones = CantTermYCond.ToString(),
+                    CantidadCategorias = CantCategorias.ToString(),
+                    CantidadComercios = CantComerciosTotales.ToString(),
+                    CantidadFAQ = CantPregFrec.ToString(),
+                    CantidadLocalidades = CantLocalidades.ToString(),
+                    CantNotificacEnviadas = CantNotifEnviadas.ToString()
+                    
                 };
 
                 return Lista;
