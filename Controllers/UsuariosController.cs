@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MundoCanjeWeb.Models;
+using System.Web.Http.Cors;
 
 namespace MundoCanjeWeb.Controllers
 {
+    [EnableCors(origins: "http://mundocanje.tk,http://localhost:51199,http://localhost:8100,http://localhost:8000", headers: "*", methods: "*")]
     public class UsuariosController : ApiController
     {
         private MundoCanjeDBEntities db = new MundoCanjeDBEntities();
@@ -84,15 +86,35 @@ namespace MundoCanjeWeb.Controllers
 
         [HttpGet]
         [Route("api/usuarios/GetUsuarioByToken/{Token}")]
-        public IHttpActionResult GetUsuarioByToken(string Token)
+        public UsuarioViewModel GetUsuarioByToken(string Token)
         {
-            Usuarios objUsuarios = db.Usuarios.Where(x => x.token == Token).FirstOrDefault();
-            if (objUsuarios == null)
+            Usuarios listUsuarios = db.Usuarios.Where(x => x.token == Token).FirstOrDefault();
+            if (listUsuarios == null)
             {
-                return NotFound();
+                return null;
             }
 
-            return Ok(objUsuarios);
+            UsuarioViewModel listVM = new UsuarioViewModel()
+            {
+                Id = listUsuarios.Id,
+                Nombre = listUsuarios.Nombre,
+                Telefono = (listUsuarios.Telefono != null) ? listUsuarios.Telefono.Value : 0,
+                Mail = listUsuarios.Mail,
+                Direccion = listUsuarios.Direccion,
+                token = listUsuarios.token,
+                Estado = (listUsuarios.Estado != null) ? listUsuarios.Estado.Value : 0,
+                IdTipo = (listUsuarios.IdTipo != null) ? listUsuarios.IdTipo.Value : 0,
+                Cuit = listUsuarios.Cuit,
+                Razon_Social = listUsuarios.Razon_Social,
+                Lat = listUsuarios.Lat,
+                Long = listUsuarios.Long,
+                Puntuacion = (listUsuarios.Puntuacion != null) ? listUsuarios.Puntuacion.Value : 0,
+                Imagen = listUsuarios.Imagen,
+                IdPlan = (listUsuarios.IdPlan != null) ? listUsuarios.IdPlan.Value : 0,
+                IdLocalidad = (listUsuarios.IdLocalidad != null) ? listUsuarios.IdLocalidad.Value : 0,
+                Fecha_Alta = (listUsuarios.Fecha_Alta != null) ? listUsuarios.Fecha_Alta.Value : DateTime.MinValue,
+            };
+            return listVM;
         }
 
         [HttpGet]

@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MundoCanjeWeb.Models;
+using System.Web.Http.Cors;
 
 namespace MundoCanjeWeb.Controllers
 {
+    [EnableCors(origins: "http://mundocanje.tk,http://localhost:51199,http://localhost:8100,http://localhost:8000", headers: "*", methods: "*")]
     public class PedidosController : ApiController
     {
         private MundoCanjeDBEntities db = new MundoCanjeDBEntities();
@@ -57,18 +59,59 @@ namespace MundoCanjeWeb.Controllers
                     IdPedido_Estado = item.IdPedido_Estado.Value,
                     Desc_Estado = item.Pedidos_Estados.Nombre,
                     Nombre_Producto = item.Productos.Nombre,
-                    Desc_Producto = item.Productos.Descripcion,
+                    Desc_Producto = (item.Productos.Descripcion != null) ? item.Productos.Descripcion : "",
                     Fecha_Pedido = (item.FechaPedido !=null)? item.FechaPedido.Value: item.FechaPedido,
                     Fecha_Entrega = (item.FechaEntrega != null) ? item.FechaEntrega.Value : item.FechaEntrega,
                     Img_Usuario = item.Productos.Usuarios.Imagen,
                     Nombre_Usuario = item.Productos.Usuarios.Nombre,
-                    Importe = item.Importe.Value
+                    Importe = (item.Importe != null) ? item.Importe.Value : 0//item.Importe.Value
                 });
 
             }
 
             return listVM;
         }
+
+        [HttpGet]
+        [Route("api/Pedidos/CanjesRecibidosByUsuario/{idUsuario}")]
+        public List<PedidoViewModel> CanjesRecibidosByUsuario(int idUsuario)
+        {
+            List<Pedidos> listaPedidos = db.Pedidos.Where(x => x.IdPedido_Estado == 3 && x.Productos.IdUsuario== idUsuario).ToList();
+
+            if (listaPedidos == null)
+            {
+                return null;
+            }
+
+            List<PedidoViewModel> listVM = new List<PedidoViewModel>();
+            foreach (var item in listaPedidos)
+            {
+                listVM.Add(new PedidoViewModel
+                {
+                    Id = item.Id,
+                    IdProducto = item.IdProducto.Value,
+                    IdUsuario = item.IdUsuario.Value,
+                    IdPedido_Estado = item.IdPedido_Estado.Value,
+                    Desc_Estado = item.Pedidos_Estados.Nombre,
+                    Nombre_Producto = item.Productos.Nombre,
+                    Desc_Producto = item.Productos.Descripcion,
+                    Fecha_Pedido = (item.FechaPedido != null) ? item.FechaPedido.Value : item.FechaPedido,
+                    Fecha_Entrega = (item.FechaEntrega != null) ? item.FechaEntrega.Value : item.FechaEntrega,
+                    Img_Usuario = item.Usuarios.Imagen,
+                    Nombre_Usuario = item.Usuarios.Nombre,
+                    Importe = item.Importe.Value,
+                    ProductoNombreMatch = item.ProductoNombreMatch,
+                    ProductoDescripcionMatch = item.ProductoDescripcionMatch,
+                    ImagenMatch = item.ImagenMatch,
+                    Comentarios = item.Comentarios,
+                    Ult_Dias = (int)DateTime.Now.Subtract(item.FechaPedido.Value).TotalDays,
+                }); ;
+
+            }
+
+            return listVM;
+        }
+
         [HttpGet]
         [Route("api/Pedidos/CanjesByState/{idEstado}")]
         public List<PedidoViewModel> CanjesByState(int idEstado)

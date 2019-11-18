@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using System.Web.Http.Cors;
 
 
 namespace MundoCanjeWeb.Controllers
 {
-    
+    [EnableCors(origins: "http://mundocanje.tk,http://localhost:51199,http://localhost:8100,http://localhost:8000", headers: "*", methods: "*")]
     public class ImageController : ApiController
     {
 

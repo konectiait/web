@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MundoCanjeWeb.Models;
+using System.Web.Http.Cors;
 
 namespace MundoCanjeWeb.Controllers
 {
+    [EnableCors(origins: "http://mundocanje.tk,http://localhost:51199,http://localhost:8100,http://localhost:8000", headers: "*", methods: "*")]
     public class ProductosController : ApiController
     {
         private MundoCanjeDBEntities db = new MundoCanjeDBEntities();
@@ -37,7 +39,7 @@ namespace MundoCanjeWeb.Controllers
 
         [HttpGet]
         [Route("api/productos/ProductsByUser/{idUsuario}")]
-        public List<ProductoViewModel> ProductsByUser(string idUsuario)
+        public List<ItemVM> ProductsByUser(string idUsuario)
         {
             List<Productos> listaProductos = db.Productos.Where(x => x.IdUsuario.ToString().Contains(idUsuario)).ToList();
 
@@ -46,22 +48,36 @@ namespace MundoCanjeWeb.Controllers
                 return null;
             }
 
-            List<ProductoViewModel> listVM = new List<ProductoViewModel>();
+            List<ItemVM> listVM = new List<ItemVM>();
             foreach (var item in listaProductos)
             {
-                listVM.Add(new ProductoViewModel
+                /*
+               listVM.Add(new ProductoViewModel
+               {
+                   Id = item.Id,
+                   Nombre = item.Nombre,
+                   Descripcion = item.Descripcion,
+                   IdTipo = item.IdTipo,
+                   IdEstado = item.IdEstado,
+                   Importe = item.Importe,
+                   Fecha_Publicacion = item.Fecha_Publicacion,
+                   TipoDespublicacion = item.TipoDespublicacion,
+                   IdCategoria = item.IdCategoria,
+                   IdUsuario = item.IdUsuario,
+                   Cantidad = item.Cantidad
+               });
+               */
+                listVM.Add(new ItemVM
                 {
                     Id = item.Id,
                     Nombre = item.Nombre,
-                    Descripcion = item.Descripcion,
+                    Descripcion = string.IsNullOrEmpty(item.Descripcion) ? "Palermo. Buenos Aires" : item.Descripcion,
                     IdTipo = item.IdTipo,
-                    IdEstado = item.IdEstado,
-                    Importe = item.Importe,
                     Fecha_Publicacion = item.Fecha_Publicacion,
-                    TipoDespublicacion = item.TipoDespublicacion,
-                    IdCategoria = item.IdCategoria,
-                    IdUsuario = item.IdUsuario,
-                    Cantidad = item.Cantidad
+                    Ult_Dias = (int)DateTime.Now.Subtract(item.Fecha_Publicacion.Value).TotalDays,
+                    Imagen = item.Imagen,
+                    Categoria = item.Categorias.Nombre,
+                    Precio = item.Importe.ToString()
                 });
 
             }
@@ -84,7 +100,7 @@ namespace MundoCanjeWeb.Controllers
 
             List<Parametros> listaBanner = db.Parametros.Where(z=>z.Key== "home_banner").ToList();
             List<Productos> listaCanjes = listaProductos.Where(x => x.IdTipo == 1).Take(4).ToList();
-            List<Productos> listaDescuentos = listaProductos.Where(x => x.IdTipo == 1).Take(3).ToList();
+            List<Productos> listaDescuentos = listaProductos.Where(x => x.IdTipo == 2).Take(3).ToList();
 
             List<ItemVM> listItemBannerVM = new List<ItemVM>();
             List<ItemVM> listItemCanjeVM = new List<ItemVM>();
@@ -111,11 +127,14 @@ namespace MundoCanjeWeb.Controllers
                 {
                     Id = item.Id,
                     Nombre = item.Nombre,
-                    Descripcion = item.Descripcion,
+                    //Descripcion = item.Descripcion,
+                    Descripcion = "Palermo. Buenos Aires",
                     IdTipo = item.IdTipo,
                     Fecha_Publicacion = item.Fecha_Publicacion,
                     Ult_Dias = (int)DateTime.Now.Subtract(item.Fecha_Publicacion.Value).TotalDays,
-                    Imagen = item.Imagen
+                    Imagen = item.Imagen,
+                    Categoria = item.Categorias.Nombre,
+                    Precio = item.Importe.ToString()
                 });
 
             }
@@ -139,6 +158,40 @@ namespace MundoCanjeWeb.Controllers
 
 
             return homeVM;
+        }
+
+        [HttpGet]
+        [Route("api/productos/GetProductosByIdTipo/{idTipo}")]
+        public List<ItemVM> GetProductosByIdTipo(int idTipo)
+        {
+            List<Productos> listaProductos = db.Productos.Where(x=> x.IdTipo== idTipo).ToList();
+
+            if (listaProductos == null)
+            {
+                return null;
+            }
+
+            List<ItemVM> listItemProducVM = new List<ItemVM>();
+           
+            foreach (var item in listaProductos)
+            {
+                listItemProducVM.Add(new ItemVM
+                {
+                    Id = item.Id,
+                    Nombre = item.Nombre,
+                    Descripcion = string.IsNullOrEmpty(item.Descripcion) ? "Palermo. Buenos Aires": item.Descripcion,
+                    IdTipo = item.IdTipo,
+                    Fecha_Publicacion = item.Fecha_Publicacion,
+                    Ult_Dias = (int)DateTime.Now.Subtract(item.Fecha_Publicacion.Value).TotalDays,
+                    Imagen = item.Imagen,
+                    Categoria = item.Categorias.Nombre,
+                    Precio = item.Importe.ToString()
+                });
+
+            }
+            
+
+            return listItemProducVM;
         }
 
         // PUT: api/Productos/5

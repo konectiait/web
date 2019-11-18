@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MundoCanjeWeb.Models;
+using System.Web.Http.Cors;
 
 namespace MundoCanjeWeb.Controllers
 {
+    [EnableCors(origins: "http://mundocanje.tk,http://localhost:51199,http://localhost:8100,http://localhost:8000", headers: "*", methods: "*")]
     public class TerminosController : ApiController
     {
         private MundoCanjeDBEntities db = new MundoCanjeDBEntities();

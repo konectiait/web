@@ -22,5 +22,10 @@ namespace MundoCanjeWeb.Models
         public string CodigoDescuento { get; set; }
         public string Img_Comercio { get; set; }
         public string Nombre_Comercio { get; set; }
+        public string ProductoNombreMatch { get; set; }
+        public string ProductoDescripcionMatch { get; set; }
+        public string ImagenMatch { get; set; }
+        public string Comentarios { get; set; }
+        public int Ult_Dias { get; set; }
     }
 }

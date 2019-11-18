@@ -9,17 +9,43 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MundoCanjeWeb.Models;
+using System.Web.Http.Cors;
 
 namespace MundoCanjeWeb.Controllers
 {
+    [EnableCors(origins: "http://mundocanje.tk,http://localhost:51199,http://localhost:8100,http://localhost:8000", headers: "*", methods: "*")]
     public class LocalidadesController : ApiController
     {
         private MundoCanjeDBEntities db = new MundoCanjeDBEntities();
 
         // GET: api/Localidades
-        public IQueryable<Localidades> GetLocalidades()
+        //public IQueryable<Localidades> GetLocalidades()
+        //{
+        //    return db.Localidades;
+        //}
+        public List<Models.CiudadesViewModel> GetLocalidades()
         {
-            return db.Localidades;
+            List<Localidades> listaLocal = db.Localidades.ToList();
+
+            if (listaLocal == null)
+            {
+                return null;
+            }
+
+            List<CiudadesViewModel> listVM = new List<CiudadesViewModel>();
+            foreach (var item in listaLocal)
+            {
+                listVM.Add(new CiudadesViewModel
+                {
+                    Id = item.Id,
+                    Nombre = item.Nombre,
+                    IdPais = 1,
+                    Pais = "Argentina"
+                });
+
+            }
+
+            return listVM;
         }
 
         // GET: api/Localidades/5

@@ -22,6 +22,8 @@ namespace MundoCanjeWeb.Models
         public Nullable<System.DateTime> Fecha_Publicacion { get; set; }
         public Nullable<int> Ult_Dias { get; set; }
         public string Imagen { get; set; }
+        public string Categoria { get; set; }
+        public string Precio { get; set; }
     }
 
 
